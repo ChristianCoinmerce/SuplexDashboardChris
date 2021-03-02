@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('title', __('User Management'))
+@section('title', __('Posts Management'))
 @section('content')
 
 
@@ -7,20 +7,19 @@
     <div class="fade-in">
         <div class="card">
             <div class="card-header">
-                User Management
+                Posts Management
                 <div class="card-header-actions">
-                    <a href="#addEmployeeModal1" data-toggle="modal" class="card-header-action">
-                        <i class="c-icon cil-plus"></i> Create User</a>
+                    {{-- <a href="#addEmployeeModal1" data-toggle="modal" class="card-header-action"><i class="c-icon cil-plus"></i> Create Post</a> --}}
                 </div>
             </div>
             <div class="card-body">
                 <div class="">
                     <div class="row mb-4">
                         <div class="col form-inline">
-                            Per Page: &nbsp;
+                            {{-- Per Page: &nbsp;
                             {!! Form::open([ 'url' => route('connect.roles'), 'method' => 'get' ]) !!}
                             {!! Form::select ( 'per_page', [ '15' => '15', '30' => '30', '60' => '60', '100' => '100'], '15', array('onchange' => "submit()", 'class'=>'form-control')) !!}
-                            {!! Form::close() !!}
+                            {!! Form::close() !!} --}}
 
 
                             <div class="col form-inline" style="justify-content: flex-end;">
@@ -35,9 +34,9 @@
                             <thead class="">
                                 <tr>
                                     <th style="cursor:pointer;">ID<i class="text-muted fas fa-sort"></i></th>
-                                    <th style="cursor:pointer;">Name<i class="fas fa-sort-up"></i></th>
-                                    <th style="cursor:pointer;">E-mail<i class="text-muted fas fa-sort"></i></th>
-                                    <th style="cursor:pointer;">Role<i class="text-muted fas fa-sort"></i></th>
+                                    <th style="cursor:pointer; width:20%">Title<i class="fas fa-sort-up"></i></th>
+                                    <th style="cursor:pointer;">Body<i class="text-muted fas fa-sort"></i></th>
+                                    <th style="cursor:pointer;">Timestamp<i class="text-muted fas fa-sort"></i></th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -47,60 +46,35 @@
                                         Loading... </td>
                                 </tr>
                             </tbody> --}}
-                            @if($users)
-                            @foreach($users as $user)
+                            @if($posts)
+                            @foreach($posts as $post)
                             <tbody>
                                 <tr class="" id="">
-                                    <td>{{ $user->id }}</td>
-                                    <td>{{ $user->name }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td>
-                                        @if($user->roles()->exists())
-                                        @foreach($user->roles as $role)
-                                        {{ $loop->first ? '' : ', ' }}
-                                            {{ $role->name }}
-                                        @endforeach
-                                        @else
-                                        None
-                                        @endif
+                                    <td>{{ $post->id }}</td>
+                                    <td>{{ $post->title }}</td>
+                                    <td>{!! strip_tags($post->body, '<div>') !!}</td>
+                                    <td>{{ $post->created_at }}
                                     </td>
                                     <td class="" id="">
-                                        <div id="editUserModal{{ $user['id'] }}" class="modal fade">
+                                        <div id="editUserModal{{ $post['id'] }}" class="modal fade">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
-                                                    <form method="POST" action="{{  route('user-role.store_userrole') }}">
+                                                    <form method="POST" action="{{  route('posts.update') }}">
                                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                         <div class="modal-header">
-                                                            <h4 class="modal-title">Edit User</h4>
+                                                            <h4 class="modal-title">Edit Post</h4>
                                                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                                         </div>
                                                         <div class="modal-body">
                                                             <div class="form-group">
-                                                                <label>Name</label>
-                                                                <input name="name" value="{{ $user->name }}" type="name" class="form-control">
+                                                                <label>Title</label>
+                                                                <input name="name" value="{{ $post->title }}" type="name" class="form-control">
                                                             </div>
                                                             <div class="form-group">
-                                                                <label>Email</label>
-                                                                <input type="email" value="{{ $user->email }}" name="email" class="form-control">
+                                                                <label>Body</label>
+                                                                <input type="email" value="{{ $post->body }}" name="email" class="form-control">
                                                             </div>
-                                                            <input type="hidden" name="user_id" class="element text" maxlength="255" size="8" value="{{ $user['id'] }}"/></input>
-                                                            <div class="form-group">
-                                                            <label>Role</label>
-                                                            <div class="form-group">
-                                                                <small for="exampleFormControlSelect2">Use CTRL to multiselect</small>
-                                                                <select multiple class="form-control" name="role_id[]">
-                                                                    @if($roles)
-                                                                    @foreach($roles as $role)
-                                                                    <option value="{{ $role['id'] }}" ><h3>{{ $role['name'] }}</h3></option>
-                                                                    @endforeach
-                                                                    @endif
-                                                                </select>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label>Password</label>
-                                                                <input type="password" name="password" class="form-control"/>
-                                                            </div>
-                                                            </div>
+                                                            <input type="hidden" name="user_id" class="element text" maxlength="255" size="8" value="{{ $post['id'] }}"/></input>
                                                             <div class="button">
                                                                 <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
                                                                 <input type="submit" class="btn btn-info" value="Save">
@@ -110,10 +84,10 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div id="deleteUserModal{{ $user['id'] }}" class="modal fade">
+                                        <div id="deleteUserModal{{ $post['id'] }}" class="modal fade">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
-                                                    <form method="GET" action="{{ route('user-role.destroy', $user['id']) }}">
+                                                    <form method="GET" action="{{ route('posts.destroy', $post['id']) }}">
                                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                         <div class="modal-header">
                                                             <h4 class="modal-title">Delete Employee</h4>
@@ -124,7 +98,7 @@
                                                             <p class="text-warning"><small>This action cannot be undone.</small></p>
                                                         <div class="button">
                                                             <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                                                            <a href="{{  url('user-role/delete/'.$user['id']) }}"><button class="btn btn-danger">Delete</button></a>
+                                                            <a href="{{  url('user-role/delete/'.$post['id']) }}"><button class="btn btn-danger">Delete</button></a>
                                                         </div>
                                                         </div>
                                                     </form>
@@ -139,8 +113,8 @@
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="moreMenuLink">
                                                 <a href="" class="dropdown-item">View Profile</a>
-                                                <a href="#editUserModal{{ $user['id'] }}" data-toggle="modal" class="dropdown-item">Edit</a>
-                                                <a href="#deleteUserModal{{ $user['id'] }}" data-toggle="modal" class="dropdown-item">Delete</a>
+                                                <a href="#editUserModal{{ $post['id'] }}" data-toggle="modal" class="dropdown-item">Edit</a>
+                                                <a href="#deleteUserModal{{ $post['id'] }}" data-toggle="modal" class="dropdown-item">Delete</a>
                                             </div>
                                         </div>
                                     </td>
@@ -150,7 +124,7 @@
                             @endif
                         </table>
                         <div class="block" style="margin-bottom:-16px">
-                            {{ $users->links() }}
+                            {{ $posts->links() }}
                         </div>
                     </div>
                 </div>
@@ -158,54 +132,5 @@
         </div>
     </div>
 </div>
-
-
-<div id="addEmployeeModal1" class="modal fade">
-	<div class="modal-dialog">
-		<div class="modal-content">
-            <form enctype="multipart/form-data" method="post" action="{{ route('user-role.store_user') }}">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}"/>
-				<div class="modal-header">
-					<h4 class="modal-title">Add User</h4>
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				</div>
-				<div class="modal-body">
-					<div class="form-group">
-						<label>Name</label>
-						<input type="text" name="name" class="form-control"/>
-					</div>
-					<div class="form-group">
-						<label>Email</label>
-						<input type="text" name="email" class="form-control"/>
-					</div>
-                        <input type="hidden" name="user_id" class="element text" maxlength="255" size="8" value="{{ $user['id'] }}"/></input>
-                    <div class="form-group">
-                        <label>Role</label>
-                    <div class="form-group">
-                        <small >Use CTRL to multiselect</small>
-                        <select multiple class="form-control" name="role_id[]">
-                            @if($roles)
-                            @foreach($roles as $role)
-                            <option value="{{ $role['id'] }}" ><h3>{{ $role['name'] }}</h3></option>
-                            @endforeach
-                            @endif
-                        </select>
-                    </div>
-                    <div class="form-group">
-						<label>Password</label>
-						<input type="password" name="password" class="form-control"/>
-					</div>
-                    </div>
-				</div><br>
-				<div class="modal-footer">
-					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-					<input type="submit" class="btn btn-primary" value="Add">
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
-
-
 
 @endsection

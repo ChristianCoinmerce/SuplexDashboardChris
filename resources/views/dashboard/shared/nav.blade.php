@@ -14,10 +14,10 @@
                 <a href="{{ route('roles.index') }}" class="c-active c-sidebar-nav-link">Role Management</a>
             </li>
             <li class="c-sidebar-nav-item">
-                <a href="{{ route('connect.roles') }}" class="c-active c-sidebar-nav-link">Post Management</a>
+                <a href="{{ route('posts.index') }}" class="c-active c-sidebar-nav-link">Post Management</a>
             </li>
             <li class="c-sidebar-nav-item">
-                <a href="{{ route('connect.roles') }}" class="c-active c-sidebar-nav-link">Comments Management</a>
+                <a href="{{ route('comments.index') }}" class="c-active c-sidebar-nav-link">Comments Management</a>
             </li>
         </ul>
     </li>

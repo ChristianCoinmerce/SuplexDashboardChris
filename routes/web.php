@@ -10,7 +10,6 @@ use App\Http\Controllers\CommentController;
 use App\Models;
 
 
-Route::get('/', [DashboardController::class, 'core'])->name('dashboard.core');
 
 
 
@@ -20,7 +19,7 @@ Route::group(['prefix' => 'auth'], function () {
 });
 
 
-Route::group(['middleware' => 'myauthcheck:1'], function () {
+Route::group(['middleware' => ['auth', 'myauthcheck:1']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
 
 
@@ -52,30 +51,31 @@ Route::group(['middleware' => 'myauthcheck:1'], function () {
         Route::get('/dashboard/roles/destroy/{id}', [RoleController::class, 'destroy'])->name('roles.destroy');
     });
 
-    // //POSTS CRUD
-    // Route::group(['middleware' => 'myauthcheck:10'], function () {
-    //     Route::post('/dashboard/posts/store', [PostController::class, 'show_crud'])->name('posts.index');
-    // });
-    // Route::group(['middleware' => 'myauthcheck:11'], function () {
-    //     Route::post('/dashboard/posts/update', [PostController::class, 'update_crud'])->name('posts.update');
-    // });
-    // Route::group(['middleware' => 'myauthcheck:12'], function () {
-    //     Route::get('/dashboard/posts/destroy/{id}', [PostController::class, 'destroy_crud'])->name('posts.destroy');
-    // });
+    //POSTS CRUD
+    Route::group(['middleware' => 'myauthcheck:10'], function () {
+        Route::get('/dashboard/posts', [PostController::class, 'show_crud'])->name('posts.index');
+    });
+    Route::group(['middleware' => 'myauthcheck:11'], function () {
+        Route::post('/dashboard/posts/update', [PostController::class, 'update_crud'])->name('posts.update');
+    });
+    Route::group(['middleware' => 'myauthcheck:12'], function () {
+        Route::get('/dashboard/posts/destroy/{id}', [PostController::class, 'destroy_crud'])->name('posts.destroy');
+    });
 
-    // //COMMENTS CRUD
-    // Route::group(['middleware' => 'myauthcheck:13'], function () {
-    //     Route::get('/dashboard/comments', [CommentController::class, 'show_crud'])->name('comments.index');
-    // });
-    // Route::group(['middleware' => 'myauthcheck:14'], function () {
-    //     Route::post('/dashboard/comments/update', [CommentController::class, 'update_crud'])->name('comments.update');
-    // });
-    // Route::group(['middleware' => 'myauthcheck:15'], function () {
-    //     Route::get('/dashboard/comments/destroy/{id}', [CommentController::class, 'destroy_crud'])->name('comments.destroy');
-    // });
+    //COMMENTS CRUD
+    Route::group(['middleware' => 'myauthcheck:13'], function () {
+        Route::get('/dashboard/comments', [CommentController::class, 'show_crud'])->name('comments.index');
+    });
+    Route::group(['middleware' => 'myauthcheck:14'], function () {
+        Route::post('/dashboard/comments/update', [CommentController::class, 'update_crud'])->name('comments.update');
+    });
+    Route::group(['middleware' => 'myauthcheck:15'], function () {
+        Route::get('/dashboard/comments/destroy/{id}', [CommentController::class, 'destroy_crud'])->name('comments.destroy');
+    });
 
 });
 
+Route::get('/', [DashboardController::class, 'core'])->name('dashboard.core');
 
 #forms
 // Route::get('/form', [FormController::class, 'create']);
@@ -85,7 +85,7 @@ Route::group(['middleware' => 'myauthcheck:1'], function () {
 
 
 // check for logged in user
-Route::group(['middleware' => 'myauthcheck:16'], function () {
+Route::group(['middleware' => ['auth','myauthcheck:16']], function () {
     Route::get('/home', [PostController::class, 'index']);
 
     Route::group(['middleware' => 'myauthcheck:17'], function () {

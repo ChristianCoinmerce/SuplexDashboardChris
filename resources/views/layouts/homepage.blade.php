@@ -84,7 +84,7 @@
         </nav>
         <nav id="breadcrumbs" aria-label="breadcrumb" style=" background-color: lightgrey;">
             <ol class="container breadcrumb mb-0">
-                <a href="{{ url('home') }}" style="color: inherit;">Home</a>
+                <a href="{{ url('/') }}" style="color: inherit;">Home</a>
                 <li aria-current="page" class="breadcrumb-item active">
                     <?php $segments = ''; ?>
               @for($i = 1; $i <= count(Request::segments()); $i++)

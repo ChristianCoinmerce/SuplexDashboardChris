@@ -1,6 +1,6 @@
 
         <div class="c-sidebar-brand">
-            <img class="c-sidebar-brand-full" src="{{ url('/assets/brand/coreui-base-white.svg') }}" width="118" height="46" alt="CoreUI Logo">
+            <div style="height: 63px; margin-top: 5px"><img class="c-sidebar-brand-full" src="{{ url('/assets/brand/laravel1.png') }}" width="188" alt="CoreUI Logo"></div>
             <img class="c-sidebar-brand-minimized" src="{{ url('assets/brand/coreui-signet-white.svg') }}" width="118" height="46" alt="CoreUI Logo">
         </div>
         <ul class="c-sidebar-nav">
