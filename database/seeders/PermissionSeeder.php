@@ -13,7 +13,7 @@ class PermissionSeeder extends Seeder
                 //ADMIN PANEL DASHBOARD
                 Permission::create(
                 ['name' => "AdminPanel",
-                'description' => "Dashboard Admin Panel",
+                'description' => "dashboard",
                 'keyword' => "dashboard",]);
 
                     //USERS CRUD
@@ -84,7 +84,7 @@ class PermissionSeeder extends Seeder
                 //HOMEPAGE
                 Permission::create(
                 ['name' => "User Homepage",
-                'description' => "Show Homepage",
+                'description' => "homepage",
                 'keyword' => "homepage",]);
 
                     //POSTS

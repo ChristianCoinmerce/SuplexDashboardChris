@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Models;
-
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
@@ -22,34 +21,34 @@ class User extends Authenticatable implements AuthenticatableContract, CanResetP
         return $this->belongsToMany(Role::class, 'role_user');
     }
 
-    public function permissions(){
-        return $this->belongsToMany(Permission::class, 'role_permission');
+    public function can_post()
+    {
+        return true;
+    }
+    public function is_admin()
+    {
+        return false;
     }
 
-//------------------------------------------------------------------------
+    public function hasPermission($permissions_id) : bool {
+        foreach($this->roles AS $role){
+            if($role->permission->contains('id', $permissions_id)){
+                return true;
+            }
+        }
 
-    // public function hasRole(... $roles ) {
-    //     foreach ($roles as $role) {
-    //         if ($this->roles->contains($role)) {
-    //             return true;
-    //         }
-    //     }
-    //     return false;
-    // }
-
-    // protected function hasPermission($permission){
-    //     return (bool) $this->permissions->where($permission)->count();
-    // }
-    // protected function hasPermissionTo($permission){
-    //     return $this->hasPermissionThroughRole($permission) || $this->hasPermission($permission);
-    // }
-    // public function hasPermissionThroughRole($permission){
-    // foreach ($permission->roles as $role){
-    //     if($this->roles->contains($role)) {
-    //         return true;
-    //     }
-    // }
-    // return false;
-    // }
+        return false;
+    }
 
 }
+//------------------------------------------------------------------------
+
+//     public function hasRole(... $roles ) {
+//         foreach ($roles as $role) {
+//             if ($this->roles->contains($role)) {
+//                 return true;
+//             }
+//         }
+//         return false;
+//     }
+

@@ -1,6 +1,6 @@
 <ul class="c-sidebar-nav ps">
     <li class="c-sidebar-nav-item">
-        <a href="https://demo.laravel-boilerplate.com/admin/dashboard" class="c-sidebar-nav-link">
+        <a href="{{ route('dashboard.index') }}" class="c-sidebar-nav-link">
             <i class="c-sidebar-nav-icon cil-speedometer"></i> Dashboard</a>
     </li>
     <li class="c-sidebar-nav-title">System</li>
@@ -15,6 +15,9 @@
             </li>
             <li class="c-sidebar-nav-item">
                 <a href="{{ route('connect.roles') }}" class="c-active c-sidebar-nav-link">Post Management</a>
+            </li>
+            <li class="c-sidebar-nav-item">
+                <a href="{{ route('connect.roles') }}" class="c-active c-sidebar-nav-link">Comments Management</a>
             </li>
         </ul>
     </li>

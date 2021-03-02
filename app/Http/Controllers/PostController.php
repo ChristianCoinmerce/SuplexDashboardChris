@@ -11,18 +11,20 @@ class PostController extends Controller
 {
     public function index()
     {
-        // $posts = Posts::where('active',1)->orderBy('created_at','desc')->paginate(5);
-        // $title = 'Posts';
+    //fetch 5 posts from database which are active and latest
+    $post = Posts::where('active',1)->orderBy('created_at','desc')->paginate(5);
+    //page heading
 
-        return view('home');
+    //return home.blade.php template from resources/views folder
+    return view('dashboard/homepage/index')->withPosts($post);
     }
 
     public function create(Request $request)
     {
         if ($request->user()->can_post()) {
-            return view('posts.create');}
+            return view('dashboard/homepage/create');}
         else {
-            return redirect('/')->withErrors('You have not sufficient permissions for writing post');
+            return redirect('dashboard/homepage/index')->withErrors('You have not sufficient permissions for writing post');
         }
     }
 
@@ -35,7 +37,7 @@ class PostController extends Controller
 
         $duplicate = Posts::where('slug', $post->slug)->first();
         if ($duplicate) {
-        return redirect('new-post')->withErrors('Title already exists.')->withInput();
+        return redirect('dashboard/homepage/index')->withErrors('Title already exists.')->withInput();
         }
 
         $post->author_id = $request->user()->id;
@@ -47,7 +49,7 @@ class PostController extends Controller
         $message = 'Post published successfully';
         }
         $post->save();
-        return redirect('edit/' . $post->slug)->withMessage($message);
+        return redirect('home/edit/' . $post->slug)->withMessage($message);
     }
 
     public function show($slug)
@@ -58,14 +60,14 @@ class PostController extends Controller
         return redirect('/')->withErrors('requested page not found');
         }
         $comments = $post->comments;
-        return view('posts.show')->withPost($post)->withComments($comments);
+        return view('dashboard/homepage/show')->withPost($post)->withComments($comments);
     }
 
     public function edit(Request $request,$slug)
     {
         $post = Posts::where('slug',$slug)->first();
         if($post && ($request->user()->id == $post->author_id || $request->user()->is_admin()))
-        return view('posts.edit')->with('post',$post);
+        return view('dashboard/homepage/edit')->with('post',$post);
         return redirect('/')->withErrors('you have not sufficient permissions');
     }
 

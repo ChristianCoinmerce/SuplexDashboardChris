@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Http\Controllers\Controller;
@@ -13,7 +15,6 @@ class RoleController extends Controller
     public function create(Request $request)
     {
         return view('roles.connect', ['roles' => Role::get()], ['permissions' => Permission::get()]);
-
     }
 
     public function store(RoleStoreRequest $request)
@@ -22,7 +23,7 @@ class RoleController extends Controller
         $role = Role::create($validated);
         $permissions = $validated['permission_id'];
         $role->permission()->attach($permissions);
-        return redirect('/roles');
+        return redirect('dashboard/roles');
     }
 
     public function update(RoleStoreRequest $request){
@@ -31,12 +32,12 @@ class RoleController extends Controller
         $role = Role::find($validated['role_id']);
         $role->update($validated);
         $role->permission()->sync($permissions);
-        return redirect('/roles');
+        return redirect('dashboard/roles');
     }
 
     public function destroy(Request $request, $id){
         $role = Role::find($id);
         $role->delete();
-        return redirect('/roles');
+        return redirect('dashboard/roles');
     }
 }

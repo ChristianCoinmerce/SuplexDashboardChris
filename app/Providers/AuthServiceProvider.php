@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Providers;
-
+use App\Models\Permission;
+use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -16,15 +17,16 @@ class AuthServiceProvider extends ServiceProvider
         // 'App\Model' => 'App\Policies\ModelPolicy',
     ];
 
-    /**
-     * Register any authentication / authorization services.
-     *
-     * @return void
-     */
+
     public function boot()
     {
         $this->registerPolicies();
 
-        //
+         Permission::get()->map(function($permission){
+            Gate::define($permission->description, function($user) use ($permission){
+               return $user->permissions->associate($permission);
+            });
+
+         });
     }
 }
