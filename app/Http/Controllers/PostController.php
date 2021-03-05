@@ -5,6 +5,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostFormRequest;
+use App\Http\Requests\PostStoreRequest;
 use App\Models\Posts;
 
 class PostController extends Controller
@@ -121,49 +122,25 @@ class PostController extends Controller
 
     public function show_crud(Request $request)
     {
-        $post = Posts::where('active',1)->orderBy('created_at','desc')->paginate(5);
+        $post = Posts::where('active',1)->orderBy('created_at','desc')->paginate(10);
         return view('roles.posts')->withPosts($post);
     }
 
 
-    // public function update_crud(Request $request){
-    //     $post_id = $request->input('post_id');
-    //     $post = Posts::find($post_id);
-    //     if ($post && ($post->author_id == $request->user()->id || $request->user()->is_admin())) {
-    //     $title = $request->input('title');
-    //     $slug = Str::slug($title);
-    //     $duplicate = Posts::where('slug', $slug)->first();
-    //     if ($duplicate) {
-    //         if ($duplicate->id != $post_id) {
-    //         return redirect('edit/' . $post->slug)->withErrors('Title already exists.')->withInput();
-    //         } else {
-    //         $post->slug = $slug;
-    //         }
-    //     }
+    public function update_crud(Request $request){
+        $post_id = $request->input('post_id');
+        $post = Posts::find($post_id);
+        $title = $request->input('title');
+        $post->title = $title;
+        $post->body = $request->input('body');
+        $post->save();
+        return redirect('dashboard/posts');
+    }
 
-    //     $post->title = $title;
-    //     $post->body = $request->input('body');
-
-    //     if ($request->has('save')) {
-    //         $post->active = 0;
-    //         $message = 'Post saved successfully';
-    //         $landing = 'edit/' . $post->slug;
-    //     } else {
-    //         $post->active = 1;
-    //         $message = 'Post updated successfully';
-    //         $landing = $post->slug;
-    //     }
-    //     $post->save();
-    //     return redirect($landing)->withMessage($message);
-    //     } else {
-    //     return redirect('/')->withErrors('you have not sufficient permissions');
-    //     }
-    // }
-
-    // public function destroy_crud(Request $request, $id){
-    //     $post = Post::find($id);
-    //     $post->delete();
-    //     return redirect('dashboard/posts');
-    // }
+    public function destroy_crud(Request $request, $id){
+        $post = Posts::find($id);
+        $post->delete();
+        return redirect('dashboard/posts');
+    }
 
 }

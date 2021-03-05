@@ -35,8 +35,8 @@
                                 <tr>
                                     <th style="cursor:pointer;">ID<i class="text-muted fas fa-sort"></i></th>
                                     <th style="cursor:pointer; width:20%">Title<i class="fas fa-sort-up"></i></th>
-                                    <th style="cursor:pointer;">Body<i class="text-muted fas fa-sort"></i></th>
-                                    <th style="cursor:pointer;">Timestamp<i class="text-muted fas fa-sort"></i></th>
+                                    <th style="cursor:pointer; max-width:5%">Body<i class="text-muted fas fa-sort"></i></th>
+                                    <th style="cursor:pointer; width:180px">Timestamp<i class="text-muted fas fa-sort"></i></th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
@@ -52,13 +52,13 @@
                                 <tr class="" id="">
                                     <td>{{ $post->id }}</td>
                                     <td>{{ $post->title }}</td>
-                                    <td>{!! strip_tags($post->body, '<div>') !!}</td>
+                                    <td style="max-width: 400px">{!! str_limit(strip_tags($post->body, '<div>'), 600) !!}</td>
                                     <td>{{ $post->created_at }}
                                     </td>
-                                    <td class="" id="">
-                                        <div id="editUserModal{{ $post['id'] }}" class="modal fade">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
+                                    <td>
+                                        <div id="editUserModal{{ $post['id'] }}" class="modal fade" style="left: -170px">
+                                            <div class="modal-dialog" >
+                                                <div class="modal-content" style="width:800px">
                                                     <form method="POST" action="{{  route('posts.update') }}">
                                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                                         <div class="modal-header">
@@ -68,13 +68,18 @@
                                                         <div class="modal-body">
                                                             <div class="form-group">
                                                                 <label>Title</label>
-                                                                <input name="name" value="{{ $post->title }}" type="name" class="form-control">
+                                                                <input name="title" value="{{ $post->title }}" type="name" class="form-control">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label>Body</label>
-                                                                <input type="email" value="{{ $post->body }}" name="email" class="form-control">
+                                                                <textarea name='body' id="mytextarea" class="form-control" style="height: 500px">
+                                                                    @if(!old('body'))
+                                                                    {!! $post->body !!}
+                                                                    @endif
+                                                                    {!! old('body') !!}
+                                                                  </textarea>
                                                             </div>
-                                                            <input type="hidden" name="user_id" class="element text" maxlength="255" size="8" value="{{ $post['id'] }}"/></input>
+                                                            <input type="hidden" name="post_id" class="element text" maxlength="255" size="8" value="{{ $post['id'] }}"/></input>
                                                             <div class="button">
                                                                 <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
                                                                 <input type="submit" class="btn btn-info" value="Save">
@@ -98,7 +103,7 @@
                                                             <p class="text-warning"><small>This action cannot be undone.</small></p>
                                                         <div class="button">
                                                             <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-                                                            <a href="{{  url('user-role/delete/'.$post['id']) }}"><button class="btn btn-danger">Delete</button></a>
+                                                            <a href="{{  url('posts/delete/'.$post['id']) }}"><button class="btn btn-danger">Delete</button></a>
                                                         </div>
                                                         </div>
                                                     </form>
@@ -112,7 +117,7 @@
                                                 aria-haspopup="true" aria-expanded="false">Actions
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="moreMenuLink">
-                                                <a href="" class="dropdown-item">View Profile</a>
+                                                <a href="" class="dropdown-item">View Post</a>
                                                 <a href="#editUserModal{{ $post['id'] }}" data-toggle="modal" class="dropdown-item">Edit</a>
                                                 <a href="#deleteUserModal{{ $post['id'] }}" data-toggle="modal" class="dropdown-item">Delete</a>
                                             </div>
