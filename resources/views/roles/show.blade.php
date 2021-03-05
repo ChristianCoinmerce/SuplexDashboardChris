@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('title', __('User Management'))
+@section('title', __('Users Management'))
 @section('content')
 
 
