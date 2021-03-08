@@ -1,21 +1,22 @@
 <template>
-  <div class="row justify-content-center">
-      <div class="col-md-8">
-          <div class="card card-default">
-              <div class="card-header">Home Component</div>
-
-              <div class="card-body">
-                  I'm the Home Component component.
-              </div>
-          </div>
-      </div>
-  </div>
+    <div>
+        <div v-for="reply in items">
+            <reply :data="reply"></reply>
+        </div>
+    </div>
 </template>
 
 <script>
+    import Reply from './Reply.vue';
+
     export default {
-        mounted() {
-            console.log('Component mounted.')
+        props: ['data'],
+
+        components: {Reply},
+
+        data() {
+            return {
+                items: this.data
+            }
         }
     }
-</script>

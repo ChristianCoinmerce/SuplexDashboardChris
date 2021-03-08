@@ -29,7 +29,7 @@
                         </div>
                     </div>
 
-                    <div class="table-responsive">
+                    <div class="table-responsive"  style="overflow-x: inherit;">
                         <table class="table table-striped">
                             <thead class="">
                                 <tr>

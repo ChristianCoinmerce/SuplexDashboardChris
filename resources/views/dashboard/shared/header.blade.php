@@ -27,37 +27,23 @@
           <li class="c-header-nav-item dropdown"><a class="c-header-nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
               <div class="c-avatar"><img class="c-avatar-img" src="{{ url('/assets/img/avatars/6.jpg') }}"></div>
             </a>
-
             <div class="dropdown-menu dropdown-menu-right pt-0">
               <div class="dropdown-header bg-light py-2"><strong>Account</strong></div>
-
-
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href="{{ url('home') }}">
                     <svg class="c-icon mr-2">
-                    <use xlink:href="{{ url('/icons/sprites/free.svg#cil-settings') }}"></use>
                     </svg> Homepage
                 </a>
-
-                <a class="dropdown-item" href="#">
-                    <svg class="c-icon mr-2">
-                    <use xlink:href="{{ url('/icons/sprites/free.svg#cil-credit-card') }}"></use>
-                    </svg> Profile
-                </a>
-
                 <div class="dropdown-divider"></div>
                 <a href="{{ url('/auth/logout') }}" class="dropdown-item">
                     <svg class="c-icon mr-2">
                     </svg>Logout
                 </a>
-
             </div>
-
-
           </li>
         </ul>
         <div class="c-subheader px-3">
           <ol class="breadcrumb border-0 m-0">
-            <li class="breadcrumb-item" style="color: inherit !important; text-decoration:none !important;"><a href="/" style="color: darkslategrey; color: inherit !important; text-decoration:none !important;">Home</a></li>
+            <li class="breadcrumb-item" style="color: inherit !important; text-decoration:none !important;"><a href="dashboard" style="color: darkslategrey; color: inherit !important; text-decoration:none !important;">Home</a></li>
             <?php $segments = ''; ?>
             @for($i = 1; $i <= count(Request::segments()); $i++)
                 <?php $segments .= '/'. Request::segment($i); ?>

@@ -69,7 +69,7 @@
                             <div aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-right">
                                 <a href="{{ route('post.create') }}" class="dropdown-item">New Post</a>
                                 <a href="" class="dropdown-item">Home</a>
-                                <a href="" class="dropdown-item">My Account</a>
+                                <a href="{{ url('home/user/'.Auth::id()) }}" class="dropdown-item">My Account</a>
                                 <a href="{{ url('/auth/logout') }}" class="dropdown-item">Logout
                                     <form method="post" action="https://demo.laravel-boilerplate.com/logout" id="logout-form" class="form-horizontal d-none">
                                         <input type="hidden" name="_token" value="fuI7J3rFbmOF2lBrJlDRpTgQzgrrjDlRKIS7qatY">

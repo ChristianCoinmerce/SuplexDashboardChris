@@ -12,14 +12,14 @@
                     {{-- <a href="#addEmployeeModal1" data-toggle="modal" class="card-header-action"><i class="c-icon cil-plus"></i> Create Post</a> --}}
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body" style="overflow: auto;">
                 <div class="">
                     <div class="row mb-4">
                         <div class="col form-inline">
-                            {{-- Per Page: &nbsp;
-                            {!! Form::open([ 'url' => route('connect.roles'), 'method' => 'get' ]) !!}
+                            Per Page: &nbsp;
+                            {!! Form::open([ 'url' => route('posts.index'), 'method' => 'get' ]) !!}
                             {!! Form::select ( 'per_page', [ '15' => '15', '30' => '30', '60' => '60', '100' => '100'], '15', array('onchange' => "submit()", 'class'=>'form-control')) !!}
-                            {!! Form::close() !!} --}}
+                            {!! Form::close() !!}
 
 
                             <div class="col form-inline" style="justify-content: flex-end;">
@@ -29,9 +29,9 @@
                         </div>
                     </div>
 
-                    <div class="table-responsive">
+                    <div class="table-responsive" style="overflow-x: inherit;">
                         <table class="table table-striped">
-                            <thead class="">
+                            <thead>
                                 <tr>
                                     <th style="cursor:pointer;">ID<i class="text-muted fas fa-sort"></i></th>
                                     <th style="cursor:pointer; width:20%">Title<i class="fas fa-sort-up"></i></th>
@@ -49,14 +49,14 @@
                             @if($posts)
                             @foreach($posts as $post)
                             <tbody>
-                                <tr class="" id="">
+                                <tr>
                                     <td>{{ $post->id }}</td>
                                     <td>{{ $post->title }}</td>
-                                    <td style="max-width: 400px">{!! str_limit(strip_tags($post->body, '<div>'), 600) !!}</td>
+                                    <td style="max-width: 400px; overflow: auto;">{!! str_limit(strip_tags($post->body, ''), 600) !!}</td>
                                     <td>{{ $post->created_at }}
                                     </td>
                                     <td>
-                                        <div id="editUserModal{{ $post['id'] }}" class="modal fade" style="left: -170px">
+                                        {{-- <div id="editUserModal{{ $post['id'] }}" class="modal fade" style="left: -170px">
                                             <div class="modal-dialog" >
                                                 <div class="modal-content" style="width:800px">
                                                     <form method="POST" action="{{  route('posts.update') }}">
@@ -88,7 +88,7 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                         <div id="deleteUserModal{{ $post['id'] }}" class="modal fade">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
@@ -117,8 +117,8 @@
                                                 aria-haspopup="true" aria-expanded="false">Actions
                                             </a>
                                             <div class="dropdown-menu" aria-labelledby="moreMenuLink">
-                                                <a href="" class="dropdown-item">View Post</a>
-                                                <a href="#editUserModal{{ $post['id'] }}" data-toggle="modal" class="dropdown-item">Edit</a>
+                                                <a href="{{ url('dashboard/posts/'.$post->slug)}}" class="dropdown-item">View Post</a>
+                                                <a href="{{ url('dashboard/posts/edit/'.$post->slug)}}" class="dropdown-item">Edit</a>
                                                 <a href="#deleteUserModal{{ $post['id'] }}" data-toggle="modal" class="dropdown-item">Delete</a>
                                             </div>
                                         </div>
