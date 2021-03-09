@@ -6,21 +6,19 @@ window.Vue = require('vue').default;
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 
-var app = new Vue({
-    el: '#app',
+var app5 = new Vue({
+    el: '#app-5',
     data: {
-      message: 'You loaded this page on ' + new Date().toLocaleString()
+      message: 'Hello Vue.js!'
+    },
+    methods: {
+      reverseMessage: function () {
+        this.message = this.message.split('').reverse().join('')
+      }
     }
   })
 
 
 
-import RolesComponent from './components/RolesComponent.vue';
 
-const routes = [
-    {
-        name: 'roles',
-        path: '/yes',
-        component: RolesComponent
-    },
-];
+import RolesComponent from './components/RolesComponent.vue';

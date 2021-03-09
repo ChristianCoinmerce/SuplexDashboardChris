@@ -14,7 +14,14 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    @foreach($workers as $worker)
+                        <div style="border: 1px solid lightgrey; border-radius: 0.25rem; margin-bottom: 5px ">
+                            <div style="margin: 10px">
+                                <p>Payout: 0,0{{ $worker['amount'] }}</p>
+                                <p>{{ date("Y, F j - H:i:s", $worker['paidOn']) }}</p>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>

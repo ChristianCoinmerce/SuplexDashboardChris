@@ -49,7 +49,8 @@
 
                             <div id="app">
                                 @{{ message }}
-                              </div>
+                            </div>
+
                             @if($roles)
                             @foreach($roles as $role)
                             <tbody>

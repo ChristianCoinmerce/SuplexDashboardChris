@@ -12,6 +12,13 @@ use App\Models;
 
 
 
+Route::get('/', function () {
+    return view('vue');
+});
+
+// Route::get('/', [DashboardController::class, 'core'])->name('dashboard.core');
+
+
 
 Route::get('auth/logout', [UserController::class, 'logout']);
 Route::group(['prefix' => 'auth'], function () {
@@ -78,7 +85,7 @@ Route::group(['middleware' => ['auth', 'myauthcheck:1']], function () {
 
 });
 
-Route::get('/', [DashboardController::class, 'core'])->name('dashboard.core');
+
 
 #forms
 // Route::get('/form', [FormController::class, 'create']);
