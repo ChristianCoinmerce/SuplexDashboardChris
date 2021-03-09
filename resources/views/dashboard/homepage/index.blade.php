@@ -20,8 +20,8 @@ There is no post till now. Login and write a new post now!!!
                     {!! $post->body !!}
                 </div>
                 <div class="card-footer">
-                    {{ $post->created_at->format('M d,Y \a\t h:i a') }} By <a
-                        href="{{ url('/user/'.$post->author_id)}}">{{ $post->author->name }}</a>
+                    {{ $post->created_at->format('M d,Y \a\t h:i a') }} By
+                    <a href="{{ url('dashboard/user/'.$post->author_id)}}">{{ $post->author->name }}</a>
                 </div>
             </div>
             @endforeach

@@ -74,9 +74,14 @@ class UserController extends Controller {
         $validated = $request->validated();
         $roles = $validated['role_id'];
         $user = User::find($validated['user_id']);
-        $user->update($validated);
+        $user->update(["name" => $validated["name"],"email" => $validated["email"]]);
+        if($validated["password"] != null) {
+            $password = Hash::make($validated["password"]);
+            $array = collect($request->validated())->forget(['password'])->put('password',$password)->all();
+            $user->update($array);
+        }
         $user->roles()->sync($roles);
-        return redirect('/users');
+        return redirect('dashboard/users');
     }
 
     public function store_user(UserRoleStoreRequest $request){
@@ -86,7 +91,7 @@ class UserController extends Controller {
         $user = User::create($array);
         $roles = $validated['role_id'];
         $user->roles()->attach($roles);
-        return redirect('/users');
+        return redirect('dashboard/users');
     }
 
     public function destroy(Request $request, $id){

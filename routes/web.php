@@ -12,6 +12,13 @@ use App\Models;
 
 
 
+Route::get('/', function () {
+    return view('vue');
+});
+
+// Route::get('/', [DashboardController::class, 'core'])->name('dashboard.core');
+
+
 
 Route::get('auth/logout', [UserController::class, 'logout']);
 Route::group(['prefix' => 'auth'], function () {
@@ -54,9 +61,12 @@ Route::group(['middleware' => ['auth', 'myauthcheck:1']], function () {
     //POSTS CRUD
     Route::group(['middleware' => 'myauthcheck:10'], function () {
         Route::get('/dashboard/posts', [PostController::class, 'show_crud'])->name('posts.index');
+        Route::get('/dashboard/posts/{slug}', [PostController::class, 'display_crud'])->where('slug', '[A-Za-z0-9-_]+')->name('posts.show');
     });
     Route::group(['middleware' => 'myauthcheck:11'], function () {
-        Route::post('/dashboard/posts/update', [PostController::class, 'update_crud'])->name('posts.update');
+        Route::get('/dashboard/posts/edit/{slug}', [PostController::class, 'edit_crud']);
+        Route::post('/dashbpard/posts/update', [PostController::class, 'update_crud'])->name('yeye123');
+
     });
     Route::group(['middleware' => 'myauthcheck:12'], function () {
         Route::get('/dashboard/posts/destroy/{id}', [PostController::class, 'destroy_crud'])->name('posts.destroy');
@@ -75,7 +85,7 @@ Route::group(['middleware' => ['auth', 'myauthcheck:1']], function () {
 
 });
 
-Route::get('/', [DashboardController::class, 'core'])->name('dashboard.core');
+
 
 #forms
 // Route::get('/form', [FormController::class, 'create']);
@@ -113,6 +123,6 @@ Route::group(['middleware' => ['auth','myauthcheck:16']], function () {
 });
 
 Route::group(['middleware' => 'myauthcheck:25'], function () {
-    Route::get('home/user/{id}', [UserController::class, 'profile'])->where('id', '[0-9]+');
+    Route::get('home/user/{id}', [UserController::class, 'profile'])->where('id', '[0-9]+')->name('profile');
     Route::get('home/user/{id}/posts', [UserController::class, 'user_posts'])->where('id', '[0-9]+');
 });

@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('title', __('Role Management'))
+@section('title', __('Roles Management'))
 @section('content')
 
 
@@ -29,7 +29,7 @@
                         </div>
                     </div>
 
-                    <div class="table-responsive">
+                    <div class="table-responsive"  style="overflow-x: inherit;">
                         <table class="table table-striped">
                             <thead class="">
                                 <tr>
@@ -49,7 +49,8 @@
 
                             <div id="app">
                                 @{{ message }}
-                              </div>
+                            </div>
+
                             @if($roles)
                             @foreach($roles as $role)
                             <tbody>

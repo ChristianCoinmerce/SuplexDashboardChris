@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-@section('title', __('User Management'))
+@section('title', __('Users Management'))
 @section('content')
 
 
@@ -13,7 +13,7 @@
                         <i class="c-icon cil-plus"></i> Create User</a>
                 </div>
             </div>
-            <div class="card-body">
+            <div class="card-body" style="overflow: auto;">
                 <div class="">
                     <div class="row mb-4">
                         <div class="col form-inline">
@@ -30,7 +30,7 @@
                         </div>
                     </div>
 
-                    <div class="table-responsive">
+                    <div class="table-responsive"  style="overflow-x: inherit;">
                         <table class="table table-striped">
                             <thead class="">
                                 <tr>
@@ -172,11 +172,11 @@
 				<div class="modal-body">
 					<div class="form-group">
 						<label>Name</label>
-						<input type="text" name="name" class="form-control"/>
+						<input type="text" name="name" class="form-control" required/>
 					</div>
 					<div class="form-group">
 						<label>Email</label>
-						<input type="text" name="email" class="form-control"/>
+						<input type="text" name="email" class="form-control" required/>
 					</div>
                         <input type="hidden" name="user_id" class="element text" maxlength="255" size="8" value="{{ $user['id'] }}"/></input>
                     <div class="form-group">
@@ -193,7 +193,7 @@
                     </div>
                     <div class="form-group">
 						<label>Password</label>
-						<input type="password" name="password" class="form-control"/>
+						<input type="password" name="password" class="form-control" required/>
 					</div>
                     </div>
 				</div><br>

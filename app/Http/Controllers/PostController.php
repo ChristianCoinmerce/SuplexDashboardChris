@@ -115,7 +115,7 @@ class PostController extends Controller
         } else{
             $data['errors'] = 'no permission';
         }
-        return redirect('/')->with($data);
+        return redirect('home')->with($data);
     }
 
 //---------------------------------------------------------------------------------------------------
@@ -126,6 +126,23 @@ class PostController extends Controller
         return view('roles.posts')->withPosts($post);
     }
 
+    public function display_crud($slug)
+    {
+        $post = Posts::where('slug',$slug)->first();
+        if(!$post)
+        {
+        return redirect('homepage/posts')->withErrors('requested page not found');
+        }
+        $comments = $post->comments;
+        return view('roles.post-show')->withPost($post)->withComments($comments);
+    }
+
+    public function edit_crud(Request $request,$slug)
+    {
+        $post = Posts::where('slug',$slug)->first();
+        return view("roles.post-edit")->with('post',$post);
+        return redirect('dashboard/posts')->withErrors('you have not sufficient permissions');
+    }
 
     public function update_crud(Request $request){
         $post_id = $request->input('post_id');

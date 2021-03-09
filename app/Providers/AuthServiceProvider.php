@@ -21,12 +21,5 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        //  Permission::get()->map(function($permission){
-            // Gate::define($permission->description, function($user) use ($permission){
-            //    return $user->permissions->associate($permission);
-            // });
-
-        //  });
     }
 }
