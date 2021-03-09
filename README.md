@@ -9,6 +9,6 @@ Has currently:
 - Blogging system
 - Roles + Permissions
 
-Soon
+Atm building on:
 - Ether Mining Dashboard
 - Replacing view with Vue.JS
