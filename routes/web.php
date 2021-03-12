@@ -12,11 +12,11 @@ use App\Models;
 
 
 
-Route::get('/', function () {
-    return view('vue');
-});
+// Route::get('/', function () {
+//     return view('vue');
+// });
 
-// Route::get('/', [DashboardController::class, 'core'])->name('dashboard.core');
+Route::get('/', [DashboardController::class, 'core'])->name('dashboard.core');
 
 
 

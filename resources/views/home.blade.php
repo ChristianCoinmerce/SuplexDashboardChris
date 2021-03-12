@@ -2,13 +2,12 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
+    <div class="row">
+        <div style="margin: 18px"></div>
         <div class="col-xs-6">
             <div class="card" style="width: 300px">
-                <div style="margin:10px"></div>
-                <div class="card-header">Payouts Rig 1</div>
-
-                <div class="card-body">
+                <div class="card-header" style="font-size: 15px">Payouts All Rigs</div>
+                <div class="card-body" style="height: 450px; overflow: scroll;">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
@@ -23,37 +22,13 @@
                                     $needed = 19 - $length;
                                     $string = "0,";
 
-                                    for ($i = 0; $i < $needed; $i++) $string =  $string . "0";
+                                    for ($i = 0; $i < $needed; $i++) $string =  $string;
 
                                     $worker2 = $string . $worker['amount'];
                                     // ~ Tigo made this
-                                    ?>
+                                ?>
                                 <p>Payout ETH: {{ substr($worker2, 0,8) }}</p>
-                                <p>Payout EUR:  €{{ substr(number_format(str_replace(".", "",$worker['amount']*$price_eur*100), 2, '.', ','), 0,6) }}</p>
-                                <p>{{ date("Y, F j - H:i:s", $worker['paidOn']) }}</p>
-                                <p></p>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-        <div style="margin:10px"></div>
-        <div class="col-xs-6">
-            <div class="card" style="width: 300px">
-                <div class="card-header">Payouts Rig 2</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                    @foreach($workers as $worker)
-                        <div style="border: 1px solid lightgrey; border-radius: 0.19rem; margin-bottom: 5px ">
-                            <div style="margin: 10px">
-                                <p>Payout ETH: 0,0{{ substr($worker['amount'], 0,9) }}</p>
-                                <p>Payout EUR:  €{{ substr(number_format(str_replace(".", "",$worker['amount']*$price_eur*100), 2, '.', ','), 0,6) }}</p>
+                                <p>Payout EUR:  €{{ substr(number_format(str_replace(".", "",$worker['amount']*$price_eur*100), 2), 0,6) }}</p>
                                 <p>{{ date("Y, F j - H:i:s", $worker['paidOn']) }}</p>
                                 <p></p>
                             </div>
@@ -65,54 +40,81 @@
 
         <div style="margin:10px"></div>
         <div class="col-xs-6">
-            <div class="card" style="width: 300px">
-                <div class="card-header">Payouts Rig 3</div>
+            <div class="card" style="width: 430px; height:300px">
+                <div class="card-header" style="font-size: 15px">Worker Info</div>
+                <div class="card-body" style="height: 450px; overflow:hidden;">
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                    @foreach($workers as $worker)
-                        <div style="border: 1px solid lightgrey; border-radius: 0.19rem; margin-bottom: 5px ">
-                            <div style="margin: 10px">
-                                <p>Payout ETH: 0,0{{ substr($worker['amount'], 0,9) }}</p>
-                                <p>Payout EUR:  €{{ substr(number_format(str_replace(".", "",$worker['amount']*$price_eur*100), 2, '.', ','), 0,6) }}</p>
-                                <p>{{ date("Y, F j - H:i:s", $worker['paidOn']) }}</p>
-                                <p></p>
-                            </div>
-                        </div>
-                    @endforeach
+
+                    <table class="table" style="border: none" cellspacing="0" cellpadding="0">
+                        <thead">
+                            <tr colspan="5" >
+                                <th scope="col" style="cursor:pointer;">Local</th>
+                                <th scope="col" style="cursor:pointer;">Online</th>
+                                <th scope="col" style="cursor:pointer;">Average</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr  >
+                                <td style="font-size:20px;">{{ substr($infos['reportedHashrate'], 0,3) }} MH/s</td>
+                                <td style="font-size:20px">{{ substr($infos['currentHashrate'], 0,3) }} MH/s</td>
+                                <td style="font-size:20px">{{ substr($infos['averageHashrate'], 0,3) }} MH/s</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+
+                    <table class="table" style="border: none" cellspacing="0" cellpadding="0">
+                        <thead">
+                            <tr>
+                                <th scope="col" style="cursor:pointer;">Valid</th>
+                                <th scope="col" style="cursor:pointer;">Rejected</th>
+                                <th scope="col" style="cursor:pointer;">Stale</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="font-size:20px;">{{ $infos['validShares'] }} Shares</td>
+                                <td style="font-size:20px">{{ $infos['invalidShares'] }} Shares</td>
+                                <td style="font-size:20px">{{ $infos['staleShares'] }} Shares</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </div>
+            
 
+            <div class="card" style="width: 430px; height:175px">
+                <div class="card-header" style="font-size: 15px">Earnings</div>
+                <div class="card-body" style="height: 450px; overflow:hidden;">
 
-        <div style="margin:10px"></div>
-        <div class="col-xs-6">
-            <div class="card" style="width: 300px">
-                <div class="card-header">Payouts Rig 3</div>
+                    <?php
+                        $date1 = date("Y, F j - H:i:s", $worker['paidOn']);
+                        $date2 = date("Y, F j - H:i:s");
+                        $time = date_diff($date1, $date2);
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-                    @foreach($workers as $worker)
-                        <div style="border: 1px solid lightgrey; border-radius: 0.19rem; margin-bottom: 5px ">
-                            <div style="margin: 10px">
-                                <p>Payout ETH: 0,0{{ substr($worker['amount'], 0,9) }}</p>
-                                <p>Payout EUR:  €{{ substr(number_format(str_replace(".", "",$worker['amount']*$price_eur*100), 2, '.', ','), 0,6) }}</p>
-                                <p>{{ date("Y, F j - H:i:s", $worker['paidOn']) }}</p>
-                                <p></p>
-                            </div>
-                        </div>
-                    @endforeach
+                    ?>
+                    <table class="table" style="border: none" cellspacing="0" cellpadding="0">
+                        <thead">
+                            <tr colspan="5" >
+                                <th scope="col" style="cursor:pointer;">Unpaid Euro</th>
+                                <th scope="col" style="cursor:pointer;">Unpaid Eth</th>
+                                <th scope="col" style="cursor:pointer;">Estimated</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td style="font-size:20px;">€{{ substr(number_format(str_replace(".", "",$infos['unpaid']*$price_eur*100), 1), 0,5) }}</td>
+                                <td style="font-size:20px">0,{{ substr($infos['unpaid'], 0,6) }}</td>
+                                <td style="font-size:20px;">€{{ substr(number_format(str_replace(".", "",$infos['coinsPerMin']*1440*$price_eur), 2), 0,5) }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-        </div>
+
+
+        {{ $time }}
+
 
     </div>
 </div>
