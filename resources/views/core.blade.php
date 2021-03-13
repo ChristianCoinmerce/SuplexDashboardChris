@@ -4,10 +4,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel Bloggie</title>
+        <title>OG?DASH</title>
 
-
-        <!-- Fonts -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
         <!-- Styles -->
@@ -62,6 +61,32 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            .border {
+                width: max-content;
+                background: linear-gradient(90deg, red 50%, transparent 50%), linear-gradient(90deg, red 50%, transparent 50%), linear-gradient(0deg, red 50%, transparent 50%), linear-gradient(0deg, red 50%, transparent 50%);
+                background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+                background-size: 15px 4px, 15px 4px, 4px 15px, 4px 15px;
+                padding: 10px;
+                animation: border-dance 13s infinite linear;
+            }
+
+            @keyframes border-dance {
+            0% {
+                background-position: 0 0, 100% 100%, 0 100%, 100% 0;
+            }
+            100% {
+                background-position: 100% 0, 0 100%, 0 0, 100% 100%;
+            }
+            }
+            .inline-a {
+                width: 50%;
+                margin-top: 63px;
+            }.inline-b {
+                width: 50%;
+                margin-top: 63px;
+                text-align: center;
+            }
         </style>
     </head>
     <body>
@@ -81,14 +106,24 @@
                 </div>
             @endif
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel Bloggie
-                </div>
+            <div class="border" style="width:460px; height:550px;"><center>
+                <div class="content" style="max-width: 400px">
+                    <div class="title m-b-md">
+                        OG?DASH
+                    </div>
+                    <div class="title" style="font-size: 25px; text-align:right;">
+                        <p>- Blog View</p>
+                        <p>- Admin Dashboard</p>
+                        <p>- Full-Stack Laravel-8</p>
+                        <p>- Ethermine Dashboard</p>
+                        <p>- User/Roles/Permissions</p>
+                    </div>
+                    <div class="links" style="text-align: left; display:flex">
 
-                <div class="links">
-                    <p>By Chris</p>
-                </div>
+                        <p class="inline-a">By Chris</p>
+                        <a class="inline-b" style="text-align: right !important; padding: 0" href="https://github.com/ChristianCoinmerce/SuplexDashboardChris"><u>Github</u></a>
+                    </div>
+                </div></center>
             </div>
         </div>
     </body>

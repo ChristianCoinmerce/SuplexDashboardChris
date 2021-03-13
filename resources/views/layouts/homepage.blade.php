@@ -55,10 +55,11 @@
                     @{{ message }}
                 </div> --}}
 
-            <div class="container"><a href="{{ url('home') }}" class="navbar-brand">Laravel
-                    Bloggie</a> <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            <div class="container"><a href="{{ url('home') }}" class="navbar-brand">OG?DASH</a> 
+                <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
-                    class="navbar-toggler"><span class="navbar-toggler-icon"></span></button>
+                    class="navbar-toggler"><span class="navbar-toggler-icon"></span>
+                </button>
                 <div id="navbarSupportedContent" class="collapse navbar-collapse">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown">

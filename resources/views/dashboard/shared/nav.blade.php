@@ -1,7 +1,7 @@
 <ul class="c-sidebar-nav ps">
     <li class="c-sidebar-nav-item">
-        <a href="{{ route('dashboard.index') }}" class="c-sidebar-nav-link">
-            <i class="c-sidebar-nav-icon cil-speedometer"></i> Dashboard</a>
+        <a href="{{ route('dashboard.pop') }}" class="c-sidebar-nav-link">
+            <i class="c-sidebar-nav-icon cil-speedometer"></i>Dashboard</a>
     </li>
     <li class="c-sidebar-nav-title">System</li>
     <li class="c-sidebar-nav-dropdown c-open">
@@ -22,13 +22,13 @@
         </ul>
     </li>
     <li class="c-sidebar-nav-dropdown">
-        <a href="#" class="c-sidebar-nav-dropdown-toggle"><i class="c-sidebar-nav-icon cil-list"></i>Logs</a>
+        <a href="#" class="c-sidebar-nav-dropdown-toggle"><i class="c-sidebar-nav-icon cil-list"></i>Ether</a>
         <ul class="c-sidebar-nav-dropdown-items">
             <li class="c-sidebar-nav-item">
-                <a href="https://demo.laravel-boilerplate.com/admin/log-viewer" class="c-active c-sidebar-nav-link">Dashboard</a>
+                <a href="{{ route('dashboard.index') }}" class="c-active c-sidebar-nav-link">Dashboard</a>
             </li>
             <li class="c-sidebar-nav-item">
-                <a href="https://demo.laravel-boilerplate.com/admin/log-viewer/logs" class="c-active c-sidebar-nav-link">Logs</a>
+                <a href="" class="c-active c-sidebar-nav-link">Logs</a>
             </li>
         </ul>
     </li>

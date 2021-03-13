@@ -27,7 +27,9 @@ Route::group(['prefix' => 'auth'], function () {
 
 
 Route::group(['middleware' => ['auth', 'myauthcheck:1']], function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard.index');
+    Route::get('/dashboard', [DashboardController::class, 'pop'])->name('dashboard.pop');
+    Route::get('/dashboard/ether', [DashboardController::class, 'index'])->name('dashboard.index');
+    
 
 
     //USERS CRUD

@@ -10,7 +10,7 @@
     <meta name="description" content="CoreUI - Open Source Bootstrap Admin Template">
     <meta name="author" content="Łukasz Holeczek">
     <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
-    <title>Laravel Bloggie - Dashboard</title>
+    <title>OG?DASH - Dashboard</title>
 
 
     <link rel="manifest" href="assets/favicon/manifest.json">
