@@ -93,14 +93,24 @@
                 </div>
             </div>
         </div>
-{{-- --------------------------------------------------------------- --}}
+{{---------------------------------------------------------------------}}
 
 
         <div class="col-12 col-xl-3">
             <div class="card">
                 <div class="card-header" style="font-size: 15px">Minerstat Data</div>
                 <div class="card-body" style="height: 450px; overflow-y: scroll;">
-                  
+                    @foreach($ms2 as $ms22)
+                    <div style="border: 1px solid lightgrey; border-radius: 0.19rem; margin-bottom: 5px ">
+                        <div style="margin: 10px">
+                            <p>Payout ETH: {{ substr(payout_eth($ms22["amount"]), 0,8) }}</p>
+                            <p>Payout EUR:
+                                €{{ substr(number_format(str_replace(".", "",$ms22['amount']*$price_eur*100), 2), 0,6) }}
+                            </p>
+                            <p>{{ date("Y, F j - H:i:s", $worker['paidOn']) }}</p>
+                        </div>
+                    </div>
+                    @endforeach
                 </div>
             </div>
         </div>
