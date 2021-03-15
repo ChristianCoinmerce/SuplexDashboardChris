@@ -43,7 +43,7 @@
         </ul>
         <div class="c-subheader px-3">
           <ol class="breadcrumb border-0 m-0">
-            <li class="breadcrumb-item" style="color: inherit !important; text-decoration:none !important;"><a href="dashboard" style="color: darkslategrey; color: inherit !important; text-decoration:none !important;">Home</a></li>
+            <li class="breadcrumb-item" style="color: inherit !important; text-decoration:none !important;"><a href="/" style="color: darkslategrey; color: inherit !important; text-decoration:none !important;">Home</a></li>
             <?php $segments = ''; ?>
             @for($i = 1; $i <= count(Request::segments()); $i++)
                 <?php $segments .= '/'. Request::segment($i); ?>

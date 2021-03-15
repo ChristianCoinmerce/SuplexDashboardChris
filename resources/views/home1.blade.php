@@ -1,5 +1,5 @@
 @extends('layouts.dashboard')
-
+@section('title', __('Mining Dashboard'))
 @section('content')
 <div class="container-fluid" style="margin-left: 0px;">
     <div class="row">
