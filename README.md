@@ -8,7 +8,7 @@ Has currently:
 - Admin dashboard interface
 - Blogging system
 - Roles + Permissions
+- Ether Mining Dashboard
 
 Atm building on:
-- Ether Mining Dashboard
 - Replacing view with Vue.JS
