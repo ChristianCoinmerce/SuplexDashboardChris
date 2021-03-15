@@ -27,9 +27,9 @@
             <li class="c-sidebar-nav-item">
                 <a href="{{ route('dashboard.index') }}" class="c-active c-sidebar-nav-link">Dashboard</a>
             </li>
-            <li class="c-sidebar-nav-item">
+            {{-- <li class="c-sidebar-nav-item">
                 <a href="" class="c-active c-sidebar-nav-link">Logs</a>
-            </li>
+            </li> --}}
         </ul>
     </li>
     <div class="ps__rail-x" style="left: 0px; bottom: 0px;">

@@ -47,10 +47,6 @@
                                 </tr>
                             </tbody> --}}
 
-                            <div id="app">
-                                @{{ message }}
-                            </div>
-
                             @if($roles)
                             @foreach($roles as $role)
                             <tbody>

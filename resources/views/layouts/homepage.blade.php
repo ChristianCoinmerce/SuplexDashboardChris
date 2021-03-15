@@ -55,7 +55,7 @@
                     @{{ message }}
                 </div> --}}
 
-            <div class="container"><a href="{{ url('home') }}" class="navbar-brand">OG?DASH</a> 
+            <div class="container"><a href="{{ url('home') }}" class="navbar-brand">OG?DASH</a>
                 <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
                     class="navbar-toggler"><span class="navbar-toggler-icon"></span>

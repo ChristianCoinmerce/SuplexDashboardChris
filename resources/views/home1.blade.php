@@ -66,11 +66,11 @@
             </div>
 
             <div class="card" style="height: 300px; overflow:hidden; max-height:174px">
-                <div class="card-header" style="font-size: 15px">Earnings
+                <div class="card-header" style="font-size: 15px">Earnings Ethermine
                 </div>
-                <div class="card-body row text-center">
+                <div class="card-body row text-center" style="    margin-top: -5px;">
                     <div class="col">
-                        <div class="text-value-xl">€{{ substr(number_format(str_replace(".", "",$infos['unpaid']*$price_eur*100), 1), 0,5) }}</div>
+                        <div class="text-value-xl">€{{ str_replace(".", "",substr($infos['unpaid']*$price_eur*100, 0,4)) }}</div>
                         <div class="text-uppercase text-muted small">Unpaid</div>
                     </div>
                     <div class="c-vr"></div>
@@ -80,14 +80,14 @@
                     </div>
                     <div class="c-vr"></div>
                     <div class="col">
-                        <div class="text-value-xl">€{{ substr(number_format(str_replace(".", "",$infos['coinsPerMin']*1440*$price_eur), 2), 0,5) }}</div>
+                        <div class="text-value-xl">€{{ str_replace(".", ",",substr($infos['coinsPerMin']*1440*$price_eur, 0,5)) }}</div>
                         <div class="text-uppercase text-muted small">Average daily</div>
                     </div>
                 </div>
                 <div class="card-footer">Since last payout:
                     @foreach($workers as $key => $worker)
                     @if ($key == 0)
-                    {{ time_diff($worker["paidOn"]) }}
+                    <b>{{ time_diff($worker["paidOn"]) }}</b>
                     @endif
                     @endforeach
                 </div>
@@ -97,96 +97,96 @@
 
 
         <div class="col-12 col-xl-3">
-            <div class="card">
-                <div class="card-header" style="font-size: 15px">Minerstat Data</div>
-                <div class="card-body" style="height: 450px; overflow-y: scroll;">
-                    @foreach($ms2 as $ms22)
-                    <div style="border: 1px solid lightgrey; border-radius: 0.19rem; margin-bottom: 5px ">
-                        <div style="margin: 10px">
-                            <p>Payout ETH: {{ substr(payout_eth($ms22["amount"]), 0,8) }}</p>
-                            <p>Payout EUR:
-                                €{{ substr(number_format(str_replace(".", "",$ms22['amount']*$price_eur*100), 2), 0,6) }}
-                            </p>
-                            <p>{{ date("Y, F j - H:i:s", $worker['paidOn']) }}</p>
-                        </div>
+
+            <div class="card" style="height: 300px; overflow:hidden; max-height:174px">
+                <div class="card-header" style="font-size: 15px">Average Earnings Minerstat</div>
+                <div class="card-body row text-center" style="    margin-top: -5px;">
+                    <div class="col">
+                        {{-- <div class="text-value-xl" style="font-size:21px">€{{ str_replace(".", ",",substr($msinfos['usd_day']/$price_usd, 0,5)) }}</div> --}}
+                        <div class="text-value-xl" style="font-size:21px">€{{ str_replace(".", ",",substr($infos['coinsPerMin']*1440*$price_eur, 0,5)) }}</div>
+                        <div class="text-uppercase text-muted small">Daily</div>
                     </div>
-                    @endforeach
+                    <div class="c-vr"></div>
+                    <div class="col">
+                        {{-- <div class="text-value-xl" style="font-size:21px">€{{ str_replace(".", ",",substr($msinfos['usd_week']/$price_usd, 0,6)) }}</div> --}}
+                        <div class="text-value-xl" style="font-size:21px">€{{ str_replace(".", ",",substr($infos['coinsPerMin']*1440*$price_eur*7, 0,6)) }}</div>
+                        <div class="text-uppercase text-muted small">Weekly</div>
+                    </div>
+                    <div class="c-vr"></div>
+                    <div class="col">
+                        {{-- <div class="text-value-xl" style="font-size:21px">€{{ str_replace(".", ",",substr($msinfos['usd_month']/$price_usd, 0,6)) }}</div> --}}
+                        <div class="text-value-xl" style="font-size:21px">€{{ str_replace(".", ",",substr($infos['coinsPerMin']*1440*$price_eur*31, 0,4)) }}</div>
+                        <div class="text-uppercase text-muted small">Monthly</div>
+                    </div>
+                </div>
+                <div class="card-footer">Current Ether price:
+                    <b>€{{ floor($msinfos['cprice']/$price_usd *100)/100 }} / ${{ floor($msinfos['cprice'] *100)/100 }}</b>
                 </div>
             </div>
-        </div>
 
-        <div class="col-12 col-xl-3">
             <div class="card" style="height: 300px; overflow:hidden; ">
                 <div class="card-header" style="font-size: 15px">Worker Info Minerstat</div>
                 <div class="card-body row text-center">
                     <div class="col">
-                        <div class="text-value-xl">{{ substr($infos['reportedHashrate'], 0,3) }} <small>MH/s</small></div>
-                        <div class="text-uppercase text-muted small">Local</div>
+                        <div class="text-value-xl" style="font-size: 22px">{{ strtoupper($msinfos['status']) }}</div>
+                        <div class="text-uppercase text-muted small">Uptime</div>
                     </div>
                     <div class="c-vr"></div>
                     <div class="col">
-                        <div class="text-value-xl">{{ substr($infos['currentHashrate'], 0,3) }} <small>MH/s</small></div>
-                        <div class="text-uppercase text-muted small">Pool</div>
+                        <div class="text-value-xl">{{ $msinfos['consumption'] }}W</div>
+                        <div class="text-uppercase text-muted small">Consumption</div>
                     </div>
                     <div class="c-vr"></div>
                     <div class="col">
-                        <div class="text-value-xl">{{ substr($infos['averageHashrate'], 0,3) }} <small>MH/s</small></div>
-                        <div class="text-uppercase text-muted small">Average</div>
+                        <div class="text-value-xl">{{ $msinfos['devices'] }} </div>
+                        <div class="text-uppercase text-muted small">Rigs</div>
                     </div>
                 </div>
                 <div class="card-body row text-center">
                     <div class="col">
-                        <div class="text-value-xl">{{ $infos['validShares'] }}</div>
+                        <div class="text-value-xl">@foreach($msinfos['shares'] as $share) @if($loop->first){{ $share}} @endif @endforeach</div>
                         <div class="text-uppercase text-muted small">Valid Shares</div>
                     </div>
                     <div class="c-vr"></div>
                     <div class="col">
-                        <div class="text-value-xl">{{ $infos['invalidShares'] }}</div>
+                        <div class="text-value-xl">0</div>
                         <div class="text-uppercase text-muted small">Rejected Shares</div>
                     </div>
                     <div class="c-vr"></div>
                     <div class="col">
-                        <div class="text-value-xl">{{ $infos['staleShares'] }}</div>
-                        <div class="text-uppercase text-muted small">Stale Shares</div>
+                        <div class="text-value-xl">TREX</div>
+                        <div class="text-uppercase text-muted small">Software</div>
                     </div>
                 </div>
-            </div>
-
-            <div class="card" style="height: 300px; overflow:hidden; max-height:174px">
-                <div class="card-header" style="font-size: 15px">Worker Info Minerstat</div>
-                <div class="card-body row text-center">
-                    <div class="col">
-                        <div class="text-value-xl">€{{ substr(number_format(str_replace(".", "",$infos['unpaid']*$price_eur*100), 1), 0,5) }}</div>
-                        <div class="text-uppercase text-muted small">Unpaid</div>
-                    </div>
-                    <div class="c-vr"></div>
-                    <div class="col">
-                        <div class="text-value-xl">0,{{ substr($infos['unpaid'], 0,3) }}</div>
-                        <div class="text-uppercase text-muted small">Unpaid Eth</div>
-                    </div>
-                    <div class="c-vr"></div>
-                    <div class="col">
-                        <div class="text-value-xl">€{{ substr(number_format(str_replace(".", "",$infos['coinsPerMin']*1440*$price_eur), 2), 0,5) }}</div>
-                        <div class="text-uppercase text-muted small">Average daily</div>
-                    </div>
-                </div>
-                <div class="card-footer">Since last payout:
-                    @foreach($workers as $key => $worker)
-                    @if ($key == 0)
-                    {{ time_diff($worker["paidOn"]) }}
-                    @endif
-                    @endforeach
+                <div class="card-footer">Pool:
+                    <b>{{ $msinfos['pool'] }}</b>
                 </div>
             </div>
         </div>
 
 
-{{-- ------------------------------------------------------- --}}
+        <div class="col-12 col-xl-3">
+            <div class="card">
+                <div class="card-header" style="font-size: 15px">Minerstat Data</div>
+                <div class="card-body" style="height: 450px; overflow-y: scroll;">
+                    <div style="border: 1px solid lightgrey; border-radius: 0.19rem; margin-bottom: 5px ">
+                        <div style="margin: 15px">
+                                <div id="app">
+                                    @{{ message }}
+                                </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+{{-----------------------------------------------------------}}
 
 
     @foreach($minerstat as $key => $ms)
         <div class="col-sm-6 col-lg-3">
-            <div class="card text-white bg-<?php 
+            <div class="card text-white bg-<?php
                     if ($ms['temp'] < 40) {
                         echo 'success';
                     }
@@ -196,7 +196,7 @@
                     else {
                         echo 'danger';
                     }
-                    
+
                 ?>">
                 <div class="card-body card-body pb-0 d-flex justify-content-between align-items-start">
                     <div>
@@ -234,6 +234,7 @@
             </div>
         </div>
     @endforeach
+
     </div>
 </div>
 @endsection
