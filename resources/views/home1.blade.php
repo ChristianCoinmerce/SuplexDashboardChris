@@ -172,7 +172,6 @@
                     <div style="border: 1px solid lightgrey; border-radius: 0.19rem; margin-bottom: 5px ">
                         <div style="margin: 15px">
                                 <div id="app">
-
                                     @{{ message }}
                                 </div>
                         </div>
