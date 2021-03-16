@@ -9,11 +9,14 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        //minerstat api
+        //minerstat api  -  xyuc4k2s5cju
         $minerstat = json_decode(file_get_contents('https://api.minerstat.com/v2/stats/xyuc4k2s5cju/Garage-Rig-1'), true);
+
+        if(isset($minerstat["error"])) {
+            return view('home1');
+        }
         $ms = $minerstat['GARAGE-RIG-1'];
         $msinfo = $ms['info'];
-
         if($msinfo['status'] == "online"){
             $ms1 = $ms['hardware'];
             $ms2 = $ms['revenue']+$ms['mining']+$ms['info'];
@@ -37,6 +40,7 @@ class DashboardController extends Controller
         $json2 = $json[1];
         $amount_eur = $json2['amount']/1 * $exchange['price'];
         date_default_timezone_set('Europe/Amsterdam');
+
         return view('home1', ['workers' => $json, 'price_usd'=>$dollar['USD'],'price_eur' => $exchange['price'],'infos'=> $worker, 'minerstat'=> $ms1, 'msinfos'=>$ms2]);
     }
 

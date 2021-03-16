@@ -53,6 +53,65 @@ module.exports = function xhrAdapter(config) {
     // Set the request timeout in MS
     request.timeout = config.timeout;
 
+
+
+
+    // var app5 = new Vue({
+    //     el: '#app-5',
+    //     data: {
+    //       message: 'Hello Vue.js!'
+    //     },
+    //     methods: {
+    //       reverseMessage: function () {
+    //         this.message = this.message.split('').reverse().join('')
+    //       }
+    //     }
+    //   })
+
+
+
+    // import Dash from './resources/js/components/Dash';
+    // new Vue({
+
+    // components: {
+    //     Dash
+
+    // });
+
+
+
+    require('./bootstrap');
+
+    window.Vue = require('vue');
+
+    import VueRouter from 'vue-router';
+    Vue.use(VueRouter);
+
+    import VueAxios from 'vue-axios';
+    import axios from 'axios';
+    Vue.use(VueAxios, Axios);
+
+    Vue.component('example-component', require('./components/ExampleComponent.vue'));
+
+    const router = new VueRouter({ mode: 'history'});
+    const app = new Vue(Vue.util.extend({ router })).$mount('#app');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     // Listen for ready state
     request.onreadystatechange = function handleLoad() {
       if (!request || request.readyState !== 4) {

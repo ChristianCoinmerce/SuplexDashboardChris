@@ -40,12 +40,13 @@
                                     <th>Actions</th>
                                 </tr>
                             </thead>
-                            {{-- <tbody wire:loading.class.remove="d-none" class="d-none">
-                                <tr>
-                                    <td colspan="8">
-                                        Loading... </td>
-                                </tr>
-                            </tbody> --}}
+
+
+                            <div id="app-5">
+                                <p>@{{ message }}</p>
+                                <button v-on:click="reverseMessage">Reverse Message</button>
+                              </div>
+
 
                             @if($roles)
                             @foreach($roles as $role)
