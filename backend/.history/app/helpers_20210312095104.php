@@ -1,0 +1,24 @@
+<?php
+if(!function_exists("time_diff")) {
+    function time_diff($string) {
+        return $string;
+    }
+}
+
+
+// <?php
+// $date1 = date("Y, F j - H:i:s", $worker['paidOn']);
+// $date2 = date("Y, F j - H:i:s");
+// $time = date_diff($date1, $date2);
+
+if(!function_exists("")) {
+    function qwert($value) {
+        $length = strlen($value);
+                                    $needed = 19 - $length;
+                                    $string = "0,";
+
+                                    for ($i = 0; $i < $needed; $i++) $string =  $string;
+
+                                    $worker2 = $string . $value;
+    }
+}
