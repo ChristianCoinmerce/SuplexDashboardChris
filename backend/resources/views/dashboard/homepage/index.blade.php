@@ -6,7 +6,6 @@ Posts
 @if ( !$posts->count() )
 There is no post till now. Login and write a new post now!!!
 @else
-<div class="">
     <div class="row justify-content-center">
         <div class="col-md-8">
             @foreach( $posts as $post )
@@ -27,11 +26,8 @@ There is no post till now. Login and write a new post now!!!
             @endforeach
             {!! $posts->render() !!}
         </div>
-
-
     </div>
 
 
-</div>
 @endif
 @endsection

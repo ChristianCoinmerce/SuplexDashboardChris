@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '80943073decb3dbb6e38cc9e8527b42fe347affb',
+    'reference' => '4a7f4fc5a3490198087bd79ad4849926ff14ae60',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -508,7 +508,16 @@
       'aliases' => 
       array (
       ),
-      'reference' => '80943073decb3dbb6e38cc9e8527b42fe347affb',
+      'reference' => '4a7f4fc5a3490198087bd79ad4849926ff14ae60',
+    ),
+    'laravel/sanctum' => 
+    array (
+      'pretty_version' => 'v2.9.1',
+      'version' => '2.9.1.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'd1e2354d94adad9685cf59b2ab0727b8d8f0a19c',
     ),
     'laravel/tinker' => 
     array (
@@ -536,6 +545,15 @@
       array (
       ),
       'reference' => 'ae15b9c4bf918ec3a78f092b8555551dd693fde3',
+    ),
+    'lcobucci/jwt' => 
+    array (
+      'pretty_version' => '3.3.3',
+      'version' => '3.3.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'c1123697f6a2ec29162b82f170dd4a491f524773',
     ),
     'league/commonmark' => 
     array (
@@ -610,6 +628,15 @@
       array (
         0 => '1.10.2',
       ),
+    ),
+    'namshi/jose' => 
+    array (
+      'pretty_version' => '7.2.3',
+      'version' => '7.2.3.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '89a24d7eb3040e285dd5925fcad992378b82bcff',
     ),
     'nesbot/carbon' => 
     array (
@@ -825,8 +852,8 @@
     array (
       'provided' => 
       array (
-        0 => '1.0',
-        1 => '1.0.0',
+        0 => '1.0.0',
+        1 => '1.0',
       ),
     ),
     'psr/simple-cache' => 
@@ -1221,6 +1248,15 @@
       ),
       'reference' => '5232de97ee3b75b0360528dae24e73db49566ab1',
     ),
+    'symfony/polyfill-php56' => 
+    array (
+      'pretty_version' => 'v1.20.0',
+      'version' => '1.20.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '54b8cd7e6c1643d78d011f3be89f3ef1f9f4c675',
+    ),
     'symfony/polyfill-php72' => 
     array (
       'pretty_version' => 'v1.22.1',
@@ -1335,6 +1371,16 @@
       array (
       ),
       'reference' => 'b43b05cf43c1b6d849478965062b6ef73e223bb5',
+    ),
+    'tymon/jwt-auth' => 
+    array (
+      'pretty_version' => 'dev-develop',
+      'version' => 'dev-develop',
+      'aliases' => 
+      array (
+        0 => '1.0.x-dev',
+      ),
+      'reference' => 'ab00f2d7cce5f043067aef7849cdc792de2df635',
     ),
     'vlucas/phpdotenv' => 
     array (

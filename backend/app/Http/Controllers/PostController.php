@@ -7,11 +7,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\PostFormRequest;
 use App\Http\Requests\PostStoreRequest;
 use App\Models\Posts;
+use App\Http\Resources\Post as PostResource;
 
 class PostController extends Controller
 {
-    public function index()
-    {
+
+// USER HOMEPAGE BELOW
+    public function index(){
     $post = Posts::where('active',1)->orderBy('created_at','desc')->paginate(5);
     return view('dashboard/homepage/index')->withPosts($post);
     }
@@ -25,8 +27,7 @@ class PostController extends Controller
         }
     }
 
-    public function store(PostFormRequest $request)
-    {
+    public function store(PostFormRequest $request){
         $post = new Posts();
         $post->title = $request->get('title');
         $post->body = $request->get('body');
@@ -49,8 +50,7 @@ class PostController extends Controller
         return redirect('home/edit/' . $post->slug)->withMessage($message);
     }
 
-    public function show($slug)
-    {
+    public function show($slug){
         $post = Posts::where('slug',$slug)->first();
         if(!$post)
         {
@@ -60,17 +60,14 @@ class PostController extends Controller
         return view('dashboard/homepage/show')->withPost($post)->withComments($comments);
     }
 
-    public function edit(Request $request,$slug)
-    {
+    public function edit(Request $request,$slug){
         $post = Posts::where('slug',$slug)->first();
         if($post && ($request->user()->id == $post->author_id || $request->user()->is_admin()))
         return view('dashboard/homepage/edit')->with('post',$post);
         return redirect('/')->withErrors('you have not sufficient permissions');
     }
 
-    public function update(Request $request)
-    {
-        //
+    public function update(Request $request){
         $post_id = $request->input('post_id');
         $post = Posts::find($post_id);
         if ($post && ($post->author_id == $request->user()->id || $request->user()->is_admin())) {
@@ -104,8 +101,7 @@ class PostController extends Controller
         }
     }
 
-    public function destroy(Request $request, $id)
-    {
+    public function destroy(Request $request, $id){
         //
         $post = Posts::find($id);
         if($post && ($post->author_id == $request->user()->id || $request->user()->is_admin()))
@@ -118,16 +114,13 @@ class PostController extends Controller
         return redirect('home')->with($data);
     }
 
-//---------------------------------------------------------------------------------------------------
-
-    public function show_crud(Request $request)
-    {
+// ADMIN DASHBOARD BELOW
+    public function show_crud(Request $request){
         $post = Posts::where('active',1)->orderBy('created_at','desc')->paginate(10);
         return view('roles.posts')->withPosts($post);
     }
 
-    public function display_crud($slug)
-    {
+    public function display_crud($slug){
         $post = Posts::where('slug',$slug)->first();
         if(!$post)
         {
@@ -137,8 +130,7 @@ class PostController extends Controller
         return view('roles.post-show')->withPost($post)->withComments($comments);
     }
 
-    public function edit_crud(Request $request,$slug)
-    {
+    public function edit_crud(Request $request,$slug){
         $post = Posts::where('slug',$slug)->first();
         return view("roles.post-edit")->with('post',$post);
         return redirect('dashboard/posts')->withErrors('you have not sufficient permissions');
@@ -160,4 +152,42 @@ class PostController extends Controller
         return redirect('dashboard/posts');
     }
 
+// API LARAVEL TO VUE BELOW
+    public function index_vue(){
+        // Get the posts
+        $posts = Posts::paginate(5);
+        // Return collection of posts as a resource
+        return PostResource::collection($posts);
+    }
+
+    public function store_vue(Request $request){
+        $post = new Posts();
+        $post->title = $request->get('title');
+        $post->body = $request->get('body');
+        $post->slug = Str::slug($post->title);
+
+        $post->author_id = $request->user()->id;
+
+        if ($post->save()) {
+            return new PostResource($post);
+        }
+    }
+
+    public function show_vue($id){
+        // Get a single post
+        $post = Posts::findOrFail($id);
+
+        // Return a single post as a resource
+        return new PostResource($post);
+    }
+
+    public function destroy_vue($id){
+        // Get the post
+        $post = Post::findOrFail($id);
+
+        //  Delete the post, return as confirmation
+        if ($post->delete()) {
+            return new PostResource($post);
+        }
+    }
 }

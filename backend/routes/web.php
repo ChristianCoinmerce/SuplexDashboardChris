@@ -11,13 +11,13 @@ use App\Models;
 
 
 
+
 // Route::get('/', function () {
 //     return view('vue');
 // });
 
+Route::get('/test', 'App\Http\Controllers\PagesController@index')->where('any', '.*');
 
-
-Route::get('/{any}', 'App\Http\Controllers\PagesController@index')->where('any', '.*');
 
 
 

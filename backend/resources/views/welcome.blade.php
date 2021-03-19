@@ -1,21 +1,86 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;600&display=swap" rel="stylesheet">
-    <script src="https://www.google.com/recaptcha/api.js?onload=vueRecaptchaApiLoaded&render=explicit" async defer>
-    </script>
-    <link rel="stylesheet" href="{{ mix('css/app.css') }}" />
+    <script src="https://cdn.tiny.cloud/1/903vg8dp38iluyzw9g8s2p12znbj7zthuxydv7m3f8ug9z52/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    <base href="./home">
+    <meta charset="utf-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <script>window.Laravel = {csrfToken: '{{ csrf_token() }}'}</script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta name="keyword" content="Bootstrap,Admin,Template,Open,Source,jQuery,CSS,HTML,RWD,Dashboard">
+    <title>OG?DASH</title>
+    <link rel="manifest" href="assets/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="assets/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <link href="{{ asset('css/free.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/flag-icon.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    @yield('css')
 
-    <title>{{env('APP_NAME')}}</title>
 </head>
-<body>
-    <div id="app">
-        <app></app>
+
+<body class="container-fluid" style="margin: 0; padding:0;">
+
+    <div id="app1">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+            <div class="container"><a href="{{ url('home') }}" class="navbar-brand">OG?DASH</a>
+                <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                    class="navbar-toggler"><span class="navbar-toggler-icon"></span>
+                </button>
+                <div id="navbarSupportedContent" class="collapse navbar-collapse">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown"
+                                role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img class="rounded-circle" style="max-height: 20px" src="https://gravatar.com/avatar/88b87698be0bc461f3cacf1f080929d5?s=80&amp;d=mp"> {{ Auth::user()->name }}<span class="caret"></span>
+                            </a>
+                            <div aria-labelledby="navbarDropdown" class="dropdown-menu dropdown-menu-right">
+                                <a href="{{ route('post.create') }}" class="dropdown-item">New Post</a>
+                                <a href="" class="dropdown-item">Home</a>
+                                <a href="{{ url('home/user/'.Auth::id()) }}" class="dropdown-item">My Account</a>
+                                <a href="{{ url('/auth/logout') }}" class="dropdown-item">Logout
+                                    <form method="post" action="https://demo.laravel-boilerplate.com/logout" id="logout-form" class="form-horizontal d-none">
+                                        <input type="hidden" name="_token" value="fuI7J3rFbmOF2lBrJlDRpTgQzgrrjDlRKIS7qatY">
+                                    </form>
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <nav id="breadcrumbs" aria-label="breadcrumb" style=" background-color: lightgrey;">
+            <ol class="container breadcrumb mb-0">
+                <a href="{{ url('/') }}" style="color: inherit;">Home</a>
+                <li aria-current="page" class="breadcrumb-item active">
+                    <?php $segments = ''; ?>
+              @for($i = 1; $i <= count(Request::segments()); $i++)
+                  <?php $segments .= '/'. Request::segment($i); ?>
+                  @if($i < count(Request::segments()))
+                  @else
+                      <li class="breadcrumb-item active">@yield('title')</li>
+                  @endif
+              @endfor
+                </li>
+            </ol>
+        </nav>
+        <main>
+            <div class="container py-4">
+                @yield('content')
+            </div>
+        </main>
     </div>
 
-    <script src="{{ mix('js/app.js') }}"></script>
+    <div id="app">
+
+        <post-list></post-list>
+    </div>
+
+    <script src="{{ asset('js/app.js') }}"></script>
+
 </body>
+
 </html>

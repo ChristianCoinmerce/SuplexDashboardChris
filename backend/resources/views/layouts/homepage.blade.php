@@ -50,11 +50,6 @@
 <body>
     <div id="app1">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-
-                {{-- <div id="app">
-                    @{{ message }}
-                </div> --}}
-
             <div class="container"><a href="{{ url('home') }}" class="navbar-brand">OG?DASH</a>
                 <button type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
@@ -99,19 +94,6 @@
         </nav>
         <main>
             <div class="container py-4">
-                {{-- <div class="row justify-content-center">
-                    <div class="col-md-8">
-                        <div class="card">
-                            <div class="card-header">
-                                Dashboard
-
-                            </div>
-                            <div class="card-body">
-                                You are logged in!
-                            </div>
-                        </div>
-                    </div>
-                </div> --}}
                 @yield('content')
             </div>
         </main>

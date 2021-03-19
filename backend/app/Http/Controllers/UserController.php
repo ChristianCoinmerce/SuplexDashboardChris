@@ -11,6 +11,8 @@ use App\Models\Posts;
 use Illuminate\Http\Request;
 use App\Http\Requests\UserRoleStoreRequest;
 use App\Http\Requests\CheckRequest;
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class UserController extends Controller {
 
