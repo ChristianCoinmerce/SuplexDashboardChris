@@ -16,7 +16,7 @@ use App\Models;
 //     return view('vue');
 // });
 
-Route::get('/test', 'App\Http\Controllers\PagesController@index')->where('any', '.*');
+// Route::get('/test', 'App\Http\Controllers\PagesController@index')->where('any', '.*');
 
 
 
