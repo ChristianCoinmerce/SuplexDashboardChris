@@ -24,7 +24,7 @@ There is no post till now. Login and write a new post now!!!
                 </div>
             </div>
             @endforeach
-            {!! $posts->render() !!}
+            {{-- {!! $posts->render() !!} --}}
         </div>
     </div>
 

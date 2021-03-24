@@ -10,9 +10,10 @@ class Post extends JsonResource
     public function toArray($request)
     {
         return [
-            'the_custom_id' => $this->id,
-            'the_custom_title' => $this->title,
-            'the_custom_body' => $this->body
+            'id' => $this->id,
+            'title' => $this->title,
+            'body' => $this->body,
+            'author' => $this->author
         ];
     }
 
