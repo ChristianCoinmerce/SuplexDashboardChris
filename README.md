@@ -1,7 +1,12 @@
-# SuplexDashboardChris
+# OG?Dash
 
-Blog with easy user and admin interface.
-Made with Laravel blade only.
+Dashboard with user and admin interface
+
+Used:
+- Laravel
+- Vue.js
+- PHP
+- Jquery
 
 Has currently:
 - User interface
@@ -10,5 +15,5 @@ Has currently:
 - Roles + Permissions
 - Ether Mining Dashboard
 
-Atm building on:
+Currently working on:
 - Replacing view with Vue.JS with direct call from Laravel API.
