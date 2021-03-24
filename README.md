@@ -11,4 +11,4 @@ Has currently:
 - Ether Mining Dashboard
 
 Atm building on:
-- Replacing view with Vue.JS
+- Replacing view with Vue.JS with direct call from Laravel API.
