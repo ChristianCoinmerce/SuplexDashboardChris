@@ -5,6 +5,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\PagesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CommentController;
 use App\Models;
@@ -16,17 +17,14 @@ use App\Models;
 //     return view('vue');
 // });
 
-Route::get('/test', 'App\Http\Controllers\PagesController@index')->where('any', '.*');
-
+Route::get('/home', [PagesController::class, 'index'])->where('any', '.*');
 
 
 
 Route::get('/', [DashboardController::class, 'core'])->name('dashboard.core');
 
 Route::get('auth/logout', [UserController::class, 'logout']);
-Route::group(['prefix' => 'auth'], function () {
-  Auth::routes();
-});
+
 
 
 Route::group(['middleware' => ['auth', 'myauthcheck:1']], function () {
@@ -101,7 +99,7 @@ Route::group(['middleware' => ['auth', 'myauthcheck:1']], function () {
 
 // check for logged in user
 Route::group(['middleware' => ['auth','myauthcheck:16']], function () {
-    Route::get('/home', [PostController::class, 'index']);
+    Route::get('/home1', [PostController::class, 'index']);
 
     Route::group(['middleware' => 'myauthcheck:17'], function () {
         Route::get('/home/new-post', [PostController::class, 'create'])->name('post.create');

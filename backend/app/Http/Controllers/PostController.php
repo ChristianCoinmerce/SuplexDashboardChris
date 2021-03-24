@@ -154,23 +154,38 @@ class PostController extends Controller
 
 // API LARAVEL TO VUE BELOW
     public function index_vue(){
-        // Get the posts
-        $posts = Posts::paginate(5);
-        // Return collection of posts as a resource
+
+        $posts = Posts::with('author')
+            ->orderBy('created_at', 'Desc')
+            ->paginate(5);
         return PostResource::collection($posts);
     }
 
     public function store_vue(Request $request){
+
         $post = new Posts();
         $post->title = $request->get('title');
         $post->body = $request->get('body');
         $post->slug = Str::slug($post->title);
-
         $post->author_id = $request->user()->id;
+        // auth()->user()->id;
 
         if ($post->save()) {
             return new PostResource($post);
         }
+
+        //clap
+            //   $post        = $request->isMethod('put') ? Posts::findOrFail($request->id) : new Posts;
+            //   $post->id    = $request->input('id');
+            //   $post->title = $request->input('title');
+            //   $post->body  = $request->input('body');
+            //   $post->author_id = $request->user()->id;
+
+            //   if ($post->save()) {
+            //       return new PostResource($post);
+            //   }
+        //
+
     }
 
     public function show_vue($id){
@@ -183,7 +198,7 @@ class PostController extends Controller
 
     public function destroy_vue($id){
         // Get the post
-        $post = Post::findOrFail($id);
+        $post = Posts::findOrFail($id);
 
         //  Delete the post, return as confirmation
         if ($post->delete()) {

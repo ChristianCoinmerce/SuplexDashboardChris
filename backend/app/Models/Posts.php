@@ -23,4 +23,5 @@ class Posts extends Model
   {
     return $this->belongsTo('App\Models\User', 'author_id');
   }
+
 }

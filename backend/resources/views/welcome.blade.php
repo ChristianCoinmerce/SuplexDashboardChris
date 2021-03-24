@@ -18,7 +18,6 @@
     <link href="{{ asset('css/flag-icon.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     @yield('css')
-
 </head>
 
 <body class="container-fluid" style="margin: 0; padding:0;">
@@ -57,26 +56,21 @@
                 <a href="{{ url('/') }}" style="color: inherit;">Home</a>
                 <li aria-current="page" class="breadcrumb-item active">
                     <?php $segments = ''; ?>
-              @for($i = 1; $i <= count(Request::segments()); $i++)
-                  <?php $segments .= '/'. Request::segment($i); ?>
-                  @if($i < count(Request::segments()))
-                  @else
-                      <li class="breadcrumb-item active">@yield('title')</li>
-                  @endif
-              @endfor
+                    @for($i = 1; $i <= count(Request::segments()); $i++)
+                        <?php $segments .= '/'. Request::segment($i); ?>
+                        @if($i < count(Request::segments()))
+                        @else
+                            <li class="breadcrumb-item active">@yield('title')</li>
+                        @endif
+                    @endfor
                 </li>
             </ol>
         </nav>
-        <main>
-            <div class="container py-4">
-                @yield('content')
-            </div>
-        </main>
     </div>
 
     <div id="app">
-
         <post-list></post-list>
+        {{-- <navbar></navbar> --}}
     </div>
 
     <script src="{{ asset('js/app.js') }}"></script>

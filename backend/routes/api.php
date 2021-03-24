@@ -19,18 +19,10 @@ use App\Http\Controllers\PostController;
 //     return $request->user();
 // });
 
+// Route::group(['middleware' => ['auth'], function () {
 
-// List all posts
-Route::get('posts', [PostController::class, 'index_vue']);
-
-// List a single post
-Route::get('post/{id}', [PostController::class, 'show_vue']);
-
-// Create a new post
-Route::post('post', [PostController::class, 'store_vue']);
-
-// Update a post
-Route::put('post', [PostController::class, 'store_vue']);
-
-// Delete a post
-Route::delete('post/{id}', [PostController::class, 'destroy_vue']);
+    Route::get('posts', [PostController::class, 'index_vue']);
+    Route::get('post/{id}', [PostController::class, 'show_vue']);
+    Route::post('post', [PostController::class, 'store_vue']);
+    Route::put('post', [PostController::class, 'store_vue']);
+    Route::delete('post/{id}', [PostController::class, 'destroy_vue']);
