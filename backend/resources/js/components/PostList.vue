@@ -60,7 +60,8 @@
 				</div>
 				<div class="modal-footer">
 					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-					<button type="submit" id="btnSave" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Save</button>
+                    <input type="submit" class="btn btn-default" value="Add">
+					<!-- <button type="submit" id="btnSave" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Save</button> -->
 				</div>
 			</form>
 		</div>
@@ -74,9 +75,6 @@
 
 
 <script>
-    $('#btnSave').click(function() {
-        $('#newPost').modal('hide');
-    });
 
     export default {
         data() {

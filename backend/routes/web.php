@@ -16,16 +16,15 @@ use App\Models;
 // Route::get('/', function () {
 //     return view('vue');
 // });
+Auth::routes();
 
+Route::get('/', [DashboardController::class, 'core'])->name('dashboard.core');
 Route::get('/home', [PagesController::class, 'index'])->where('any', '.*');
 
 
 
-Route::get('/', [DashboardController::class, 'core'])->name('dashboard.core');
 
 Route::get('auth/logout', [UserController::class, 'logout']);
-
-
 
 Route::group(['middleware' => ['auth', 'myauthcheck:1']], function () {
     Route::get('/dashboard', [DashboardController::class, 'pop'])->name('dashboard.pop');

@@ -1920,9 +1920,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-$('#btnSave').click(function () {
-  $('#newPost').modal('hide');
-});
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -37769,14 +37767,10 @@ var staticRenderFns = [
         attrs: { type: "button", "data-dismiss": "modal", value: "Cancel" }
       }),
       _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-success",
-          attrs: { type: "submit", id: "btnSave" }
-        },
-        [_c("i", { staticClass: "glyphicon glyphicon-ok" }), _vm._v(" Save")]
-      )
+      _c("input", {
+        staticClass: "btn btn-default",
+        attrs: { type: "submit", value: "Add" }
+      })
     ])
   }
 ]
