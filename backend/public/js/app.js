@@ -1921,7 +1921,51 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: ['user'],
   data: function data() {
     return {
       posts: [],
@@ -1930,8 +1974,15 @@ __webpack_require__.r(__webpack_exports__);
         id: '',
         title: '',
         body: ''
-      }
+      },
+      update: false,
+      post_id: ''
     };
+  },
+  mounted: function mounted() {
+    $('#btnSave').click(function () {
+      $('#newPost').modal('hide');
+    });
   },
   created: function created() {
     this.getPosts();
@@ -1962,21 +2013,65 @@ __webpack_require__.r(__webpack_exports__);
     addPost: function addPost() {
       var _this2 = this;
 
-      fetch('api/post', {
-        method: 'post',
-        body: JSON.stringify(this.post),
+      if (this.update === false) {
+        fetch('api/post', {
+          method: 'post',
+          body: JSON.stringify(this.post),
+          headers: {
+            'content-type': 'apllication/json',
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        }).then(function (res) {
+          return res.text();
+        }).then(function (data) {
+          _this2.getPosts();
+        })["catch"](function (err) {
+          return console.log(err);
+        });
+      }
+    },
+    deletePost: function deletePost(id) {
+      var _this3 = this;
+
+      fetch('api/post/' + id, {
+        method: 'delete',
         headers: {
-          'content-type': 'apllication/json',
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
-      }) // .then(response => response.json())
-      .then(function (res) {
-        return res.text();
+      }).then(function (response) {
+        return response.json();
       }).then(function (data) {
-        _this2.getPosts();
+        _this3.getPosts();
       })["catch"](function (err) {
         return console.log(err);
       });
+    },
+    updatePost: function updatePost(post) {
+      this.update = true;
+      this.post.id = post.id;
+      this.post.post_id = post.id;
+      this.post.title = post.title;
+      this.post.body = post.body;
+    },
+    updatePost2: function updatePost2() {
+      var _this4 = this;
+
+      if (this.update === true) {
+        fetch('api/post', {
+          method: 'put',
+          body: JSON.stringify(this.post),
+          headers: {
+            'content-type': 'application/json',
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        }).then(function (res) {
+          return res.text();
+        }).then(function (data) {
+          _this4.getPosts();
+        })["catch"](function (err) {
+          return console.log(err);
+        });
+      }
     }
   }
 });
@@ -37521,7 +37616,13 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container py-4" }, [
-    _vm._m(0),
+    _c("div", {}, [
+      _c("div", { staticClass: "text" }, [
+        _c("p", [_vm._v(_vm._s(_vm.user.name))])
+      ]),
+      _vm._v(" "),
+      _vm._m(0)
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "row justify-content-center" }, [
       _c(
@@ -37563,10 +37664,62 @@ var render = function() {
               ),
               _vm._v(" "),
               _c("div", { staticClass: "card-footer" }, [
-                _vm._v("\n                    By\n                    "),
-                _c("a", { attrs: { href: "" } }, [
-                  _vm._v(_vm._s(post.author.name))
-                ])
+                _c(
+                  "div",
+                  {
+                    staticClass: "col form-inline",
+                    staticStyle: { "margin-left": "-15px" }
+                  },
+                  [
+                    _vm._v("\n                        By  "),
+                    _c("a", { attrs: { href: "" } }, [
+                      _vm._v(_vm._s(post.author.name))
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "col form-inline",
+                        staticStyle: {
+                          "justify-content": "flex-end",
+                          "margin-right": "-50px"
+                        }
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-secondary",
+                            attrs: {
+                              href: "#updatePost",
+                              "data-toggle": "modal"
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.updatePost(post)
+                              }
+                            }
+                          },
+                          [_vm._v("Update")]
+                        ),
+                        _vm._v(" \n                        "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-secondary",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                return _vm.deletePost(post.id)
+                              }
+                            }
+                          },
+                          [_vm._v("Delete")]
+                        )
+                      ]
+                    )
+                  ]
+                )
               ])
             ])
           }),
@@ -37719,6 +37872,92 @@ var render = function() {
           )
         ])
       ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "modal fade", attrs: { id: "updatePost" } }, [
+      _c("div", { staticClass: "modal-dialog" }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _c(
+            "form",
+            {
+              attrs: {
+                enctype: "multipart/form-data",
+                method: "post",
+                action: ""
+              },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.updatePost2($event)
+                }
+              }
+            },
+            [
+              _c("input", {
+                attrs: { type: "hidden", name: "_token", value: "" }
+              }),
+              _vm._v(" "),
+              _vm._m(3),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("Title")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.post.title,
+                        expression: "post.title"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { type: "text", placeholder: "Title", required: "" },
+                    domProps: { value: _vm.post.title },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.post, "title", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("Description")]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.post.body,
+                        expression: "post.body"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: { placeholder: "Body", required: "" },
+                    domProps: { value: _vm.post.body },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.post, "body", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(4)
+            ]
+          )
+        ])
+      ])
     ])
   ])
 }
@@ -37727,14 +37966,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "a",
-      {
-        staticClass: "card-header-action",
-        attrs: { href: "#newPost", "data-toggle": "modal" }
-      },
-      [_c("i", { staticClass: "c-icon cil-plus" }), _vm._v(" Create Post")]
-    )
+    return _c("div", { staticClass: "text" }, [_c("p")])
   },
   function() {
     var _vm = this
@@ -37767,10 +37999,55 @@ var staticRenderFns = [
         attrs: { type: "button", "data-dismiss": "modal", value: "Cancel" }
       }),
       _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success",
+          attrs: { type: "submit", id: "btnSave" }
+        },
+        [_c("i", { staticClass: "glyphicon glyphicon-ok" }), _vm._v(" Submit")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h4", { staticClass: "modal-title" }, [_vm._v("Update Post")]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-hidden": "true"
+          }
+        },
+        [_vm._v("×")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-footer" }, [
       _c("input", {
         staticClass: "btn btn-default",
-        attrs: { type: "submit", value: "Add" }
-      })
+        attrs: { type: "button", "data-dismiss": "modal", value: "Cancel" }
+      }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "btn btn-success",
+          attrs: { type: "submit", id: "btnSave" }
+        },
+        [_c("i", { staticClass: "glyphicon glyphicon-ok" }), _vm._v(" Submit")]
+      )
     ])
   }
 ]

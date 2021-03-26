@@ -163,29 +163,30 @@ class PostController extends Controller
 
     public function store_vue(Request $request){
 
-        $post = new Posts();
-        $post->title = $request->get('title');
-        $post->body = $request->get('body');
-        $post->slug = Str::slug($post->title);
-        $post->author_id = $request->user()->id;
-        // auth()->user()->id;
+        if($request->isMethod('put')){
+        $post = $request->isMethod('put') ? Posts::findOrFail($request->id) : new Posts();
+            if($post->author_id == $request->user()->id){
+                $post->title = $request->get('title');
+                $post->body = $request->get('body');
+                $post->slug = Str::slug($post->title);
+                $post->author_id = $request->user()->id;
 
-        if ($post->save()) {
-            return new PostResource($post);
+                if ($post->save()) {
+                    return new PostResource($post);
+                }
+            }
         }
+        else{
+            $post = new Posts();
+            $post->title = $request->get('title');
+            $post->body = $request->get('body');
+            $post->slug = Str::slug($post->title);
+            $post->author_id = $request->user()->id;
+            if ($post->save()) {
+                return new PostResource($post);
+            }
 
-        //clap
-            //   $post        = $request->isMethod('put') ? Posts::findOrFail($request->id) : new Posts;
-            //   $post->id    = $request->input('id');
-            //   $post->title = $request->input('title');
-            //   $post->body  = $request->input('body');
-            //   $post->author_id = $request->user()->id;
-
-            //   if ($post->save()) {
-            //       return new PostResource($post);
-            //   }
-        //
-
+        }
     }
 
     public function show_vue($id){
@@ -196,13 +197,18 @@ class PostController extends Controller
         return new PostResource($post);
     }
 
-    public function destroy_vue($id){
-        // Get the post
-        $post = Posts::findOrFail($id);
 
-        //  Delete the post, return as confirmation
-        if ($post->delete()) {
+    public function destroy_vue(Request $request, $id){
+        //
+        $post = Posts::find($id);
+        if($post && ($post->author_id == $request->user()->id || $request->user()->is_admin()))
+        {
+            $post->delete();
             return new PostResource($post);
+            $data['message'] = 'Post deleted';
+        } else{
+            $data['errors'] = 'no permission';
         }
+        return redirect('home')->with($data);
     }
 }

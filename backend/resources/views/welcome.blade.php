@@ -52,25 +52,29 @@
             </div>
         </nav>
         <nav id="breadcrumbs" aria-label="breadcrumb" style=" background-color: lightgrey;">
-            <ol class="container breadcrumb mb-0">
-                <a href="{{ url('/') }}" style="color: inherit;">Home</a>
-                <li aria-current="page" class="breadcrumb-item active">
-                    <?php $segments = ''; ?>
-                    @for($i = 1; $i <= count(Request::segments()); $i++)
-                        <?php $segments .= '/'. Request::segment($i); ?>
-                        @if($i < count(Request::segments()))
-                        @else
-                            <li class="breadcrumb-item active">@yield('title')</li>
-                        @endif
-                    @endfor
-                </li>
+            <ol class="container breadcrumb mb-0" style="width: 100%;" >
+                <div style="display: flex; width: 75%;">
+                    <a href="{{ url('/') }}" style="color: inherit;">Home</a>
+                    <li aria-current="page" class="breadcrumb-item active">
+                        <?php $segments = ''; ?>
+                        @for($i = 1; $i <= count(Request::segments()); $i++)
+                            <?php $segments .= '/'. Request::segment($i); ?>
+                            @if($i < count(Request::segments()))
+                            @else
+                                <li class="breadcrumb-item active">@yield('title')</li>
+                            @endif
+                        @endfor
+                    </li>
+                </div>
+                <div style="width: 25%; text-align: right"><a href="#newPost" data-toggle="modal" class="card-header-action"><i class="c-icon cil-plus"></i> Create Post</a></div>
             </ol>
         </nav>
     </div>
 
     <div id="app">
-        <post-list></post-list>
+        <post-list :user="{{ Auth::user() }}"></post-list>
         {{-- <navbar></navbar> --}}
+        </script>
     </div>
 
     <script src="{{ asset('js/app.js') }}"></script>

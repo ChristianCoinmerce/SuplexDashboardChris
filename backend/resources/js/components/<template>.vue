@@ -23,3 +23,37 @@
 		</form>
     </div>
 </template>
+
+
+<script>
+    export default {
+        data() {
+            return {
+                post: {
+                    id: '',
+                    title: '',
+                    body: ''
+                }
+            };
+        },
+        created() {
+            this.getPosts();
+        },
+        methods: {
+            addPost(){
+                fetch('api/post', {
+                    method: 'post',
+                    body: JSON.stringify(this.post),
+                    headers: {
+                        'content-type': 'apllication/json'
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        this.getPosts();
+                    })
+                    .catch(err => console.log(err));
+            }
+        }
+    };
+</script>
