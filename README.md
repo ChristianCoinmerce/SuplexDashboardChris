@@ -17,3 +17,11 @@ Has currently:
 
 Currently working on:
 - Replacing view with Vue.JS with direct call from Laravel API.
+
+
+
+Installation
+- clone
+- setup env. file
+- "php artisan db:seed"
+- login with credentials: email:"george@gmail.com", password:"12345678"
