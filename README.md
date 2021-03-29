@@ -21,7 +21,8 @@ Currently working on:
 
 --------------------------
 Installation
-- clone
+- clone repo
+- cd into the backend folder
 - setup env. file
 - "php artisan db:seed"
 - login with credentials: email:"george@gmail.com", password:"12345678"
