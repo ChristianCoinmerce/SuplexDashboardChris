@@ -13,6 +13,7 @@ class Post extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'body' => $this->body,
+            'author_id' => $this->author_id,
             'author' => $this->author
         ];
     }

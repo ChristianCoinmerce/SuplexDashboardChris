@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,8 +21,8 @@ use App\Http\Controllers\PostController;
 
 // Route::group(['middleware' => ['auth'], function () {
 
-    Route::get('posts', [PostController::class, 'index_vue']);
-    Route::get('post/{id}', [PostController::class, 'show_vue']);
-    Route::post('post', [PostController::class, 'store_vue']);
-    Route::put('post', [PostController::class, 'store_vue']);
-    Route::delete('post/{id}', [PostController::class, 'destroy_vue']);
+    Route::get('posts', [UserPostController::class, 'index_vue']);
+    Route::get('post/{id}', [UserPostController::class, 'show_vue']);
+    Route::post('post', [UserPostController::class, 'store_vue']);
+    Route::put('post', [UserPostController::class, 'store_vue']);
+    Route::delete('post/{id}', [UserPostController::class, 'destroy_vue']);

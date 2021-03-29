@@ -37788,177 +37788,199 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "modal fade", attrs: { id: "newPost" } }, [
-      _c("div", { staticClass: "modal-dialog" }, [
-        _c("div", { staticClass: "modal-content" }, [
-          _c(
-            "form",
-            {
-              attrs: {
-                enctype: "multipart/form-data",
-                method: "post",
-                action: ""
-              },
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  return _vm.addPost($event)
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: { id: "newPost", "data-backdrop": "static" }
+      },
+      [
+        _c("div", { staticClass: "modal-dialog" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _c(
+              "form",
+              {
+                attrs: {
+                  enctype: "multipart/form-data",
+                  method: "post",
+                  action: ""
+                },
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.addPost($event)
+                  }
                 }
-              }
-            },
-            [
-              _c("input", {
-                attrs: { type: "hidden", name: "_token", value: "" }
-              }),
-              _vm._v(" "),
-              _vm._m(1),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Title")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.post.title,
-                        expression: "post.title"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "text", placeholder: "Title", required: "" },
-                    domProps: { value: _vm.post.title },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+              },
+              [
+                _c("input", {
+                  attrs: { type: "hidden", name: "_token", value: "" }
+                }),
+                _vm._v(" "),
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", [_vm._v("Title")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.post.title,
+                          expression: "post.title"
                         }
-                        _vm.$set(_vm.post, "title", $event.target.value)
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        placeholder: "Title",
+                        required: ""
+                      },
+                      domProps: { value: _vm.post.title },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.post, "title", $event.target.value)
+                        }
                       }
-                    }
-                  })
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", [_vm._v("Description")]),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.post.body,
+                          expression: "post.body"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { placeholder: "Body", required: "" },
+                      domProps: { value: _vm.post.body },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.post, "body", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Description")]),
-                  _vm._v(" "),
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.post.body,
-                        expression: "post.body"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { placeholder: "Body", required: "" },
-                    domProps: { value: _vm.post.body },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.post, "body", $event.target.value)
-                      }
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _vm._m(2)
-            ]
-          )
+                _vm._m(2)
+              ]
+            )
+          ])
         ])
-      ])
-    ]),
+      ]
+    ),
     _vm._v(" "),
-    _c("div", { staticClass: "modal fade", attrs: { id: "updatePost" } }, [
-      _c("div", { staticClass: "modal-dialog" }, [
-        _c("div", { staticClass: "modal-content" }, [
-          _c(
-            "form",
-            {
-              attrs: {
-                enctype: "multipart/form-data",
-                method: "post",
-                action: ""
-              },
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  return _vm.updatePost2($event)
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: { id: "updatePost", "data-backdrop": "static" }
+      },
+      [
+        _c("div", { staticClass: "modal-dialog" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _c(
+              "form",
+              {
+                attrs: {
+                  enctype: "multipart/form-data",
+                  method: "post",
+                  action: ""
+                },
+                on: {
+                  submit: function($event) {
+                    $event.preventDefault()
+                    return _vm.updatePost2($event)
+                  }
                 }
-              }
-            },
-            [
-              _c("input", {
-                attrs: { type: "hidden", name: "_token", value: "" }
-              }),
-              _vm._v(" "),
-              _vm._m(3),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Title")]),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.post.title,
-                        expression: "post.title"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { type: "text", placeholder: "Title", required: "" },
-                    domProps: { value: _vm.post.title },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+              },
+              [
+                _c("input", {
+                  attrs: { type: "hidden", name: "_token", value: "" }
+                }),
+                _vm._v(" "),
+                _vm._m(3),
+                _vm._v(" "),
+                _c("div", { staticClass: "modal-body" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", [_vm._v("Title")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.post.title,
+                          expression: "post.title"
                         }
-                        _vm.$set(_vm.post, "title", $event.target.value)
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        placeholder: "Title",
+                        required: ""
+                      },
+                      domProps: { value: _vm.post.title },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.post, "title", $event.target.value)
+                        }
                       }
-                    }
-                  })
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", [_vm._v("Description")]),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.post.body,
+                          expression: "post.body"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { placeholder: "Body", required: "" },
+                      domProps: { value: _vm.post.body },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.post, "body", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "form-group" }, [
-                  _c("label", [_vm._v("Description")]),
-                  _vm._v(" "),
-                  _c("textarea", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.post.body,
-                        expression: "post.body"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: { placeholder: "Body", required: "" },
-                    domProps: { value: _vm.post.body },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.$set(_vm.post, "body", $event.target.value)
-                      }
-                    }
-                  })
-                ])
-              ]),
-              _vm._v(" "),
-              _vm._m(4)
-            ]
-          )
+                _vm._m(4)
+              ]
+            )
+          ])
         ])
-      ])
-    ])
+      ]
+    )
   ])
 }
 var staticRenderFns = [

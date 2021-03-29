@@ -55,7 +55,7 @@
     @endif -->
 
 
-    <div id="newPost" class="modal fade">
+    <div id="newPost" class="modal fade" data-backdrop="static">
         <div class="modal-dialog">
             <div class="modal-content">
                 <form enctype="multipart/form-data" method="post" action="" @submit.prevent="addPost">
@@ -84,7 +84,7 @@
     </div>
 
 
-    <div id="updatePost" class="modal fade">
+    <div id="updatePost" class="modal fade" data-backdrop="static">
         <div class="modal-dialog">
             <div class="modal-content">
                 <form enctype="multipart/form-data" method="post" action="" @submit.prevent="updatePost2">

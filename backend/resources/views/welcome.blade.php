@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+ <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <script src="https://cdn.tiny.cloud/1/903vg8dp38iluyzw9g8s2p12znbj7zthuxydv7m3f8ug9z52/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
     <base href="./home">

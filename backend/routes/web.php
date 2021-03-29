@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\FormController;
+use App\Http\Controllers\UserPostController;
+use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PagesController;
@@ -17,6 +17,7 @@ use App\Models;
 //     return view('vue');
 // });
 Auth::routes();
+
 
 Route::get('/', [DashboardController::class, 'core'])->name('dashboard.core');
 Route::get('/home', [PagesController::class, 'index'])->where('any', '.*');
@@ -62,16 +63,16 @@ Route::group(['middleware' => ['auth', 'myauthcheck:1']], function () {
 
     //POSTS CRUD
     Route::group(['middleware' => 'myauthcheck:10'], function () {
-        Route::get('/dashboard/posts', [PostController::class, 'show_crud'])->name('posts.index');
-        Route::get('/dashboard/posts/{slug}', [PostController::class, 'display_crud'])->where('slug', '[A-Za-z0-9-_]+')->name('posts.show');
+        Route::get('/dashboard/posts', [AdminPostController::class, 'show_crud'])->name('posts.index');
+        Route::get('/dashboard/posts/{slug}', [AdminPostController::class, 'display_crud'])->where('slug', '[A-Za-z0-9-_]+')->name('posts.show');
     });
     Route::group(['middleware' => 'myauthcheck:11'], function () {
-        Route::get('/dashboard/posts/edit/{slug}', [PostController::class, 'edit_crud']);
-        Route::post('/dashbpard/posts/update', [PostController::class, 'update_crud'])->name('yeye123');
+        Route::get('/dashboard/posts/edit/{slug}', [AdminPostController::class, 'edit_crud']);
+        Route::post('/dashbpard/posts/update', [AdminPostController::class, 'update_crud'])->name('yeye123');
 
     });
     Route::group(['middleware' => 'myauthcheck:12'], function () {
-        Route::get('/dashboard/posts/destroy/{id}', [PostController::class, 'destroy_crud'])->name('posts.destroy');
+        Route::get('/dashboard/posts/destroy/{id}', [AdminPostController::class, 'destroy_crud'])->name('posts.destroy');
     });
 
     //COMMENTS CRUD
@@ -98,23 +99,23 @@ Route::group(['middleware' => ['auth', 'myauthcheck:1']], function () {
 
 // check for logged in user
 Route::group(['middleware' => ['auth','myauthcheck:16']], function () {
-    Route::get('/home1', [PostController::class, 'index']);
+    Route::get('/home1', [UserPostController::class, 'index']);
 
     Route::group(['middleware' => 'myauthcheck:17'], function () {
-        Route::get('/home/new-post', [PostController::class, 'create'])->name('post.create');
-        Route::post('/home/new-post', [PostController::class, 'store'])->name('post.store');
+        Route::get('/home/new-post', [UserPostController::class, 'create'])->name('post.create');
+        Route::post('/home/new-post', [UserPostController::class, 'store'])->name('post.store');
     });
     Route::group(['middleware' => 'myauthcheck:18'], function () {
-        Route::get('/home/{slug}', [PostController::class, 'show'])->where('slug', '[A-Za-z0-9-_]+');
+        Route::get('/home/{slug}', [UserPostController::class, 'show'])->where('slug', '[A-Za-z0-9-_]+');
         Route::get('/home/my-all-posts', [UserController::class, 'user_posts_all']);
         Route::get('/home/my-drafts', [UserController::class, 'user_posts_draft']);
     });
     Route::group(['middleware' => 'myauthcheck:19'], function () {
-        Route::get('/home/edit/{slug}', [PostController::class, 'edit']);
-        Route::post('/home/update', [PostController::class, 'update']);
+        Route::get('/home/edit/{slug}', [UserPostController::class, 'edit']);
+        Route::post('/home/update', [UserPostController::class, 'update']);
     });
     Route::group(['middleware' => 'myauthcheck:20'], function () {
-        Route::get('/home/delete/{id}', [PostController::class, 'destroy']);
+        Route::get('/home/delete/{id}', [UserPostController::class, 'destroy']);
     });
     Route::group(['middleware' => 'myauthcheck:21'], function () {
         Route::post('/home/comment/add', [CommentController::class, 'store']);
