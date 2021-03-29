@@ -19,7 +19,7 @@ Currently working on:
 - Replacing view with Vue.JS with direct call from Laravel API.
 
 
-
+--------------------------
 Installation
 - clone
 - setup env. file
