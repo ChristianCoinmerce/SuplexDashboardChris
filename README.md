@@ -23,6 +23,7 @@ Currently working on:
 Installation
 - clone repo
 - cd into the backend folder
+- install composer and npm
 - setup env. file
 - "php artisan db:seed"
 - login with credentials: email:"george@gmail.com", password:"12345678"
