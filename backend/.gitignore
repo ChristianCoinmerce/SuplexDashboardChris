@@ -3,7 +3,7 @@
 /public/hot
 /public/storage
 /storage/*.key
-/vendor
+/vendor/
 .env
 .env.backup
 .phpunit.result.cache
@@ -29,3 +29,4 @@ yarn-error.log
 .history/backend/routes/web_20210317123145.php
 .history/backend/routes/web_20210317123146.php
 .history
+/.idea
