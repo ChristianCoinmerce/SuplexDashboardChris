@@ -53,5 +53,10 @@ class DashboardController extends Controller
     {
         return view('core');
     }
+
+    public function welcome()
+    {
+        return view('welcome');
+    }
 }
 

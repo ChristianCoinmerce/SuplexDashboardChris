@@ -132,46 +132,37 @@ class UserPostController extends Controller
                 $post->title = $request->get('title');
                 $post->body = $request->get('body');
                 $post->slug = Str::slug($post->title);
-                $post->author_id = $request->user()->id;
+                $post->author_id = auth()->user()->id;
 
                 if ($post->save()) {
                     return new PostResource($post);
                 }
             }
         }
+
         else{
             $post = new Posts();
             $post->title = $request->get('title');
             $post->body = $request->get('body');
             $post->slug = Str::slug($post->title);
-            $post->author_id = $request->user()->id;
+            $post->author_id = auth()->user()->id;
 
             if ($post->save()) {
                 return new PostResource($post);
             }
         }
     }
-
     public function show_vue($id){
-        // Get a single post
         $post = Posts::findOrFail($id);
-
-        // Return a single post as a resource
         return new PostResource($post);
     }
 
-
     public function destroy_vue(Request $request, $id){
-        //
         $post = Posts::find($id);
-        if($post && ($post->author_id == $request->user()->id || $request->user()->is_admin()))
-        {
+        if($post && ($post->author_id == $request->user()->id)){
             $post->delete();
             return new PostResource($post);
-            $data['message'] = 'Post deleted';
-        } else{
-            $data['errors'] = 'no permission';
         }
-        return redirect('home')->with($data);
     }
 }
+

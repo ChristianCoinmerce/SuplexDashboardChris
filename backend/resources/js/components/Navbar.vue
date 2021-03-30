@@ -1,24 +1,18 @@
 <template>
-    <div class="text-center">dddddddddsadadasdasdasdasdasdasds
-        <ul class="pagination">
-            <li v-if="pagination.current_page > 1" class="page-item" aria-disabled="true" aria-label="« Vorige">
-                <a class="page-link" v-on:click.prevent="changePage(pagination.current_page - 1)" aria-disabled="true" aria-label="« Vorige">‹</a>
-            </li>
-            <li v-else class="page-item disabled" aria-disabled="true" aria-label="« Vorige">
-                <span class="page-link" aria-hidden="true">‹</span>
-            </li>
-
-            <li v-for="page in pagesNumber" :class="{'page-item active': page == pagination.current_page, 'page-item': page != pagination.current_page}">
-                <a href="javascript:void(0)" v-on:click.prevent="changePage(page)">{{ page }}</a>
-            </li>
-
-            <li v-if="pagination.current_page < pagination.last_page" class="page-item">
-                <a class="page-link" v-on:click.prevent="changePage(pagination.current_page + 1)" rel="next" aria-label="Volgende »">›</a>
-            </li>
-            <li v-else class="page-item disabled">
-                <span class="page-link" aria-hidden="true">›</span>
-            </li>
-        </ul>
+    <div class="text-center">
+        <nav>
+            <ul class="pagination justify-content-center">
+                <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
+                    <a class="page-link" href="#" @click="getPosts(pagination.prev_page_url)">Previous</a>
+                </li>
+                <li class="page-item disabled">
+                    <a class="page-link" href="#">{{ pagination.current_page }} of {{ pagination.last_page }}</a>
+                </li>
+                <li v-bind:class="[{disabled: !pagination.next_page_url}]" class="page-item">
+                    <a class="page-link" href="#" @click="getPosts(pagination.next_page_url)">Next</a>
+                </li>
+            </ul>
+        </nav>
     </div>
 </template>
 <script>

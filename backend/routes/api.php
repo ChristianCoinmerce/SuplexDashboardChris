@@ -19,10 +19,14 @@ use App\Http\Controllers\UserPostController;
 //     return $request->user();
 // });
 
-// Route::group(['middleware' => ['auth'], function () {
+Route::middleware('auth:sanctum')->group(function () {
+
 
     Route::get('posts', [UserPostController::class, 'index_vue']);
     Route::get('post/{id}', [UserPostController::class, 'show_vue']);
     Route::post('post', [UserPostController::class, 'store_vue']);
     Route::put('post', [UserPostController::class, 'store_vue']);
     Route::delete('post/{id}', [UserPostController::class, 'destroy_vue']);
+
+
+});
