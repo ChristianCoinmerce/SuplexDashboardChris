@@ -73,7 +73,7 @@
 
     <div id="app">
         <post-list :user="{{ Auth::user() }}"></post-list>
-        <navbar></navbar>
+        {{-- <navbar></navbar> --}}
         </script>
     </div>
 

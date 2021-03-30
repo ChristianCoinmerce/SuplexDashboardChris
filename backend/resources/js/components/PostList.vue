@@ -31,7 +31,7 @@
                 </div>
             </div>
             <!-- pagination -->
-            <!-- <nav>
+            <nav>
                 <ul class="pagination justify-content-center">
                     <li v-bind:class="[{disabled: !pagination.prev_page_url}]" class="page-item">
                         <a class="page-link" href="#" @click="getPosts(pagination.prev_page_url)">Previous</a>
@@ -43,7 +43,7 @@
                         <a class="page-link" href="#" @click="getPosts(pagination.next_page_url)">Next</a>
                     </li>
                 </ul>
-            </nav> -->
+            </nav>
         </div>
     </div>
 

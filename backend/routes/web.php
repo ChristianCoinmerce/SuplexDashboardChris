@@ -5,18 +5,12 @@ use App\Http\Controllers\UserPostController;
 use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\PagesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\CommentController;
 use App\Models;
 
 
-
-
-// Route::get('/', function () {
-//     return view('vue');
-// });
-
+Auth::routes();
 
 
 Route::get('/', [DashboardController::class, 'core'])->name('dashboard.core');
