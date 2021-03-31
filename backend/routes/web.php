@@ -11,7 +11,7 @@ use App\Models;
 
 
 Auth::routes();
-
+Route::get('auth/logout', [UserController::class, 'logout']);
 
 Route::get('/', [DashboardController::class, 'core'])->name('dashboard.core');
 
@@ -21,7 +21,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/home', [DashboardController::class, 'welcome'])->where('any', '.*');
 
-    Route::get('auth/logout', [UserController::class, 'logout']);
+
 
     // --------------------------------------------------------------------------------------
 

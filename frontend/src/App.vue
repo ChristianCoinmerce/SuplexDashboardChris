@@ -2,13 +2,35 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/signin">Sign in</router-link> |
-      <router-link to="/account">Account Name</router-link> |
-      <a href="#">Sign out</a>
+      <router-link to="/about" v-if="isLogged">About</router-link>
+      <router-link to="/login" v-else>Login</router-link>
     </div>
+    <button type="button" @click="logout()" v-if="isLogged">
+      Logout
+    </button>
+
     <router-view/>
+
   </div>
 </template>
+
+<script>
+import { mapGetters } from 'vuex'
+
+export default {
+  computed: {
+    ...mapGetters([
+      'isLogged'
+    ])
+  },
+
+  methods: {
+    logout () {
+      this.$store.dispatch('logout')
+    }
+  }
+}
+</script>
 
 <style>
 #app {

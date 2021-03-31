@@ -2,41 +2,6 @@
 node_modules
 /dist
 
-
-/node_modules
-/.history/
-/public/hot
-/public/storage
-/storage/*.key
-/vendor/
-.env
-.env.backup
-.phpunit.result.cache
-Homestead.json
-Homestead.yaml
-npm-debug.log
-yarn-error.log
-.history/backend/routes/web_20210317115421.php
-.history/backend/routes/web_20210317122812.php
-.history/backend/routes/web_20210317122918.php
-.history/backend/routes/web_20210317123024.php
-.history/.gitignore_20210317123106
-.history/.gitignore_20210317123107
-.history/backend/.gitignore_20210317121843
-.history/backend/.gitignore_20210317123112
-.history/backend/routes/web_20210317123135.php
-.history/backend/routes/web_20210317123136.php
-.history/backend/routes/web_20210317123139.php
-.history/backend/routes/web_20210317123141.php
-.history/backend/routes/web_20210317123142.php
-.history/backend/routes/web_20210317123143.php
-.history/backend/routes/web_20210317123144.php
-.history/backend/routes/web_20210317123145.php
-.history/backend/routes/web_20210317123146.php
-.history
-/.idea
-
-
 # local env files
 .env.local
 .env.*.local
@@ -45,7 +10,6 @@ yarn-error.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-pnpm-debug.log*
 
 # Editor directories and files
 .idea

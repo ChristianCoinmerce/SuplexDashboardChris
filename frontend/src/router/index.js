@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import SignIn from '../views/SignIn.vue'
 
 Vue.use(VueRouter)
 
@@ -12,9 +11,17 @@ const routes = [
     component: Home
   },
   {
-    path: '/signin',
-    name: 'SignIn',
-    component: SignIn
+    path: '/about',
+    name: 'About',
+    meta: {
+      auth: true
+    },
+    component: () => import('../views/About.vue')
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('../views/Login.vue')
   }
 ]
 
@@ -22,6 +29,16 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  const loggedIn = localStorage.getItem('user')
+
+  if (to.matched.some(record => record.meta.auth) && !loggedIn) {
+    next('/login')
+    return
+  }
+  next()
 })
 
 export default router
