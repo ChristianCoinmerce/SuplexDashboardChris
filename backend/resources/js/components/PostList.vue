@@ -126,7 +126,7 @@
                 posts: [],
                 pagination: {},
                 post: {
-                    id: '',
+                    id: '1',
                     title: '',
                     body: ''
                 },

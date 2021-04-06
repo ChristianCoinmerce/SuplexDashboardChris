@@ -1,4 +1,4 @@
-@extends('dashboard.authBase')
+@extends('rest.authBase')
 
 @section('content')
 

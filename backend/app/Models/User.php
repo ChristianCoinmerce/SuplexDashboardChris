@@ -4,10 +4,12 @@ namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use HasApiTokens, HasFactory, Notifiable;
+use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable implements AuthenticatableContract, CanResetPasswordContract
 {
+    use HasApiTokens, Notifiable;
 
     protected $table = 'users';
     protected $fillable = ['name', 'email', 'password'];
@@ -43,14 +45,3 @@ class User extends Authenticatable implements AuthenticatableContract, CanResetP
     }
 
 }
-//------------------------------------------------------------------------
-
-//     public function hasRole(... $roles ) {
-//         foreach ($roles as $role) {
-//             if ($this->roles->contains($role)) {
-//                 return true;
-//             }
-//         }
-//         return false;
-//     }
-

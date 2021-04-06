@@ -2047,7 +2047,7 @@ __webpack_require__.r(__webpack_exports__);
       posts: [],
       pagination: {},
       post: {
-        id: '',
+        id: '1',
         title: '',
         body: ''
       },
@@ -37861,101 +37861,163 @@ var render = function() {
       _c(
         "div",
         { staticClass: "col-md-8" },
-        _vm._l(_vm.posts, function(post) {
-          return _c("div", { key: post.id, staticClass: "card" }, [
-            _c("div", { staticClass: "card-header" }, [
-              _c("h4", [
-                _c(
-                  "a",
-                  { staticStyle: { color: "inherit" }, attrs: { href: "" } },
-                  [_vm._v(_vm._s(post.title))]
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass: "card-body",
-                staticStyle: {
-                  "max-height": "500px",
-                  overflow: "hidden",
-                  "-webkit-mask-image":
-                    "linear-gradient(to bottom, black 50%, transparent 100%)",
-                  "mask-image":
-                    "linear-gradient(to bottom, black 50%, transparent 100%)"
-                }
-              },
-              [
-                _vm._v(
-                  "\n                    " +
-                    _vm._s(post.body) +
-                    "\n                "
-                )
-              ]
-            ),
-            _vm._v(" "),
-            _c("div", { staticClass: "card-footer" }, [
+        [
+          _vm._l(_vm.posts, function(post) {
+            return _c("div", { key: post.id, staticClass: "card" }, [
+              _c("div", { staticClass: "card-header" }, [
+                _c("h4", [
+                  _c(
+                    "a",
+                    { staticStyle: { color: "inherit" }, attrs: { href: "" } },
+                    [_vm._v(_vm._s(post.title))]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
               _c(
                 "div",
                 {
-                  staticClass: "col form-inline",
-                  staticStyle: { "margin-left": "-15px" }
+                  staticClass: "card-body",
+                  staticStyle: {
+                    "max-height": "500px",
+                    overflow: "hidden",
+                    "-webkit-mask-image":
+                      "linear-gradient(to bottom, black 50%, transparent 100%)",
+                    "mask-image":
+                      "linear-gradient(to bottom, black 50%, transparent 100%)"
+                  }
                 },
                 [
-                  _vm._v("\n                        By  "),
-                  _c("a", { attrs: { href: "" } }, [
-                    _vm._v(_vm._s(post.author.name))
-                  ]),
-                  _vm._v(" "),
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(post.body) +
+                      "\n                "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "card-footer" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "col form-inline",
+                    staticStyle: { "margin-left": "-15px" }
+                  },
+                  [
+                    _vm._v("\n                        By  "),
+                    _c("a", { attrs: { href: "" } }, [
+                      _vm._v(_vm._s(post.author.name))
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "col form-inline",
+                        staticStyle: {
+                          "justify-content": "flex-end",
+                          "margin-right": "-50px"
+                        }
+                      },
+                      [
+                        _c(
+                          "a",
+                          {
+                            staticClass: "btn btn-secondary",
+                            attrs: {
+                              href: "#updatePost",
+                              "data-toggle": "modal"
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.updatePost(post)
+                              }
+                            }
+                          },
+                          [_vm._v("Update")]
+                        ),
+                        _vm._v(" \n                        "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-secondary",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                return _vm.deletePost(post.id)
+                              }
+                            }
+                          },
+                          [_vm._v("Delete")]
+                        )
+                      ]
+                    )
+                  ]
+                )
+              ])
+            ])
+          }),
+          _vm._v(" "),
+          _c("nav", [
+            _c("ul", { staticClass: "pagination justify-content-center" }, [
+              _c(
+                "li",
+                {
+                  staticClass: "page-item",
+                  class: [{ disabled: !_vm.pagination.prev_page_url }]
+                },
+                [
                   _c(
-                    "div",
+                    "a",
                     {
-                      staticClass: "col form-inline",
-                      staticStyle: {
-                        "justify-content": "flex-end",
-                        "margin-right": "-50px"
+                      staticClass: "page-link",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          return _vm.getPosts(_vm.pagination.prev_page_url)
+                        }
                       }
                     },
-                    [
-                      _c(
-                        "a",
-                        {
-                          staticClass: "btn btn-secondary",
-                          attrs: {
-                            href: "#updatePost",
-                            "data-toggle": "modal"
-                          },
-                          on: {
-                            click: function($event) {
-                              return _vm.updatePost(post)
-                            }
-                          }
-                        },
-                        [_vm._v("Update")]
-                      ),
-                      _vm._v(" \n                        "),
-                      _c(
-                        "button",
-                        {
-                          staticClass: "btn btn-secondary",
-                          attrs: { type: "button" },
-                          on: {
-                            click: function($event) {
-                              return _vm.deletePost(post.id)
-                            }
-                          }
-                        },
-                        [_vm._v("Delete")]
-                      )
-                    ]
+                    [_vm._v("Previous")]
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("li", { staticClass: "page-item disabled" }, [
+                _c("a", { staticClass: "page-link", attrs: { href: "#" } }, [
+                  _vm._v(
+                    _vm._s(_vm.pagination.current_page) +
+                      " of " +
+                      _vm._s(_vm.pagination.last_page)
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "li",
+                {
+                  staticClass: "page-item",
+                  class: [{ disabled: !_vm.pagination.next_page_url }]
+                },
+                [
+                  _c(
+                    "a",
+                    {
+                      staticClass: "page-link",
+                      attrs: { href: "#" },
+                      on: {
+                        click: function($event) {
+                          return _vm.getPosts(_vm.pagination.next_page_url)
+                        }
+                      }
+                    },
+                    [_vm._v("Next")]
                   )
                 ]
               )
             ])
           ])
-        }),
-        0
+        ],
+        2
       )
     ]),
     _vm._v(" "),
