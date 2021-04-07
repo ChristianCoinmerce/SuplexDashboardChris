@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Direction;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\Posts;
+use App\Http\Resources\Post as PostResource;
 use App\Http\Controllers\Controller;
 
 class DashboardController extends Controller
@@ -54,9 +55,9 @@ class DashboardController extends Controller
         return view('core');
     }
 
-    public function welcome()
+    public function welcome(Request $request)
     {
+
         return view('userpage/welcome');
     }
 }
-

@@ -21,6 +21,9 @@ use App\Http\Controllers\Roles\RoleController;
 //Leftover Directions
 use App\Http\Controllers\Direction\DashboardController;
 
+// use App\Http\Controllers\Posts\VuePostController;
+
+
 
 
 
@@ -30,7 +33,9 @@ Route::get('/', [DashboardController::class, 'core'])->name('dashboard.core');
 
 Route::middleware('auth:sanctum')->group(function () {
 
+    // Route::get('/home', [VuePostController::class, 'store'])->where('any', '.*');
     Route::get('/home', [DashboardController::class, 'welcome'])->where('any', '.*');
+
 
     Route::group(['middleware' => ['auth', 'myauthcheck:1']], function () {
         Route::get('/dashboard', [DashboardController::class, 'pop'])->name('dashboard.pop');

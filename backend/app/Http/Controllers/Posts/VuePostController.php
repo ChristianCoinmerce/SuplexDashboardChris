@@ -10,10 +10,9 @@ use App\Http\Resources\Post as PostResource;
 
 class VuePostController extends Controller
 {
-
 // API LARAVEL TO VUE BELOW
-    public function index(){
 
+    public function index(){
         $posts = Posts::with('author')
             ->orderBy('created_at', 'Desc')
             ->paginate(5);
@@ -37,11 +36,12 @@ class VuePostController extends Controller
         }
 
         else{
+            // auth()->user()->id
             $post = new Posts();
             $post->title = $request->get('title');
             $post->body = $request->get('body');
             $post->slug = Str::slug($post->title);
-            $post->author_id = 3;
+            $post->author_id = 1;
             if ($post->save()) {
                 return new PostResource($post);
             }
